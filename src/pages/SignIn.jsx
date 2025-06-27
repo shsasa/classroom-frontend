@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { SignInUser } from '../services/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../styles/SignIn.css';
 import { toast } from 'react-toastify';
@@ -60,6 +60,12 @@ const SignIn = () => {
           Sign In
         </button>
       </form>
+
+      <div className="forgot-password-link">
+        <Link to="/reset-password" className="link">
+          Forgot your password?
+        </Link>
+      </div>
     </div>
   );
 };

@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
+import Client from '../services/api';
+import { toast } from 'react-toastify';
 import '../styles/AddUser.css';
 
 const AddUser = () => {
   const initialState = {
     name: '',
     email: '',
-    password: '',
     role: 'student',
   };
   const [formValues, setFormValues] = useState(initialState);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would send the data to the backend
-    setSuccess(true);
-    setFormValues(initialState);
-    setTimeout(() => setSuccess(false), 2000);
+    setLoading(true);
+
+    try {
+      const response = await Client.post('/auth/add-user', formValues);
+      toast.success('User added successfully! They will receive an email to set their password.');
+      setFormValues(initialState);
+    } catch (error) {
+      if (error.response?.data?.msg) {
+        toast.error(error.response.data.msg);
+      } else {
+        toast.error('Failed to add user. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,17 +62,6 @@ const AddUser = () => {
           />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formValues.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="input-wrapper">
           <label htmlFor="role">Role</label>
           <select
             id="role"
@@ -74,10 +75,9 @@ const AddUser = () => {
             <option value="admin">Admin</option>
           </select>
         </div>
-        <button type="submit" disabled={!(formValues.name && formValues.email && formValues.password)}>
-          Add User
+        <button type="submit" disabled={!(formValues.name && formValues.email) || loading}>
+          {loading ? 'Adding User...' : 'Add User'}
         </button>
-        {success && <p style={{ color: '#b71c1c', marginTop: '1rem' }}>User added successfully!</p>}
       </form>
     </div>
   );

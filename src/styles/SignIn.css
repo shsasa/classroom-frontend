@@ -76,3 +76,22 @@ button[type="submit"]:disabled {
   color: #b71c1c;
   cursor: not-allowed;
 }
+
+/* Forgot Password Link Styles */
+.forgot-password-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.forgot-password-link .link {
+  color: #b71c1c;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-password-link .link:hover {
+  color: #f44336;
+  text-decoration: underline;
+}
