@@ -30,22 +30,35 @@ const SignIn = () => {
 
   return (
     <div className="signin">
-      {/* Logo at the top */}
-
-
-      {/* Styled "Sign In" text */}
+      {/* You can add a logo here if you want */}
       <h2 className="signin-text">Sign In</h2>
-
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="on">
         <div className="input-wrapper">
           <label htmlFor="email">Email</label>
-          <input onChange={handleChange} id="email" type="email" placeholder="example@example.com" value={formValues.email} required autoComplete="email" />
+          <input
+            onChange={handleChange}
+            id="email"
+            type="email"
+            placeholder="example@example.com"
+            value={formValues.email}
+            required
+            autoComplete="email"
+          />
         </div>
         <div className="input-wrapper">
           <label htmlFor="password">Password</label>
-          <input onChange={handleChange} type="password" id="password" value={formValues.password} required />
+          <input
+            onChange={handleChange}
+            type="password"
+            id="password"
+            value={formValues.password}
+            required
+            autoComplete="current-password"
+          />
         </div>
-        <button disabled={!formValues.email || !formValues.password}>Sign In</button>
+        <button type="submit" disabled={!formValues.email || !formValues.password}>
+          Sign In
+        </button>
       </form>
     </div>
   );
