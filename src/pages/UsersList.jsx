@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { getAllUsers, changeUserRole, changeUserStatus, deleteUser, generateResetToken, getUserResetToken } from '../services/users'
 import { toast } from 'react-toastify'
@@ -10,14 +10,17 @@ const UsersList = () => {
   const navigate = useNavigate()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
-  const [hasInitialLoad, setHasInitialLoad] = useState(false)
+  const [searching, setSearching] = useState(false)
   const [filters, setFilters] = useState({
     role: '',
     status: '',
     search: ''
   })
+  const searchTimeoutRef = useRef(null)
+  const initialLoadRef = useRef(false)
 
-  const fetchUsers = useCallback(async () => {
+  // Function to fetch users from API
+  const fetchUsers = useCallback(async (searchFilters) => {
     if (!user || (user.role !== 'admin' && user.role !== 'supervisor')) {
       setLoading(false)
       return
@@ -25,7 +28,8 @@ const UsersList = () => {
 
     try {
       setLoading(true)
-      const usersData = await getAllUsers(filters)
+      setSearching(false) // Clear searching state when actually fetching
+      const usersData = await getAllUsers(searchFilters || filters)
       setUsers(usersData)
     } catch (error) {
       console.error('Error fetching users:', error)
@@ -35,25 +39,56 @@ const UsersList = () => {
     }
   }, [user, filters])
 
-  // Initial load - only once when user becomes available
+  // Initial load when component mounts and user is available
   useEffect(() => {
-    if (user && (user.role === 'admin' || user.role === 'supervisor') && !hasInitialLoad) {
-      fetchUsers()
-      setHasInitialLoad(true)
+    if (user && (user.role === 'admin' || user.role === 'supervisor') && !initialLoadRef.current) {
+      initialLoadRef.current = true
+      fetchUsers(filters)
     }
-  }, [user, fetchUsers, hasInitialLoad])
+  }, [user, fetchUsers, filters])
 
-  // Handle filter changes with debouncing (only after initial load)
+  // Handle all filter changes (with proper debounce for search)
   useEffect(() => {
-    if (hasInitialLoad && user && (user.role === 'admin' || user.role === 'supervisor')) {
-      const isSearch = filters.search.trim() !== ''
-      const timeoutId = setTimeout(() => {
-        fetchUsers()
-      }, isSearch ? 300 : 0)
-
-      return () => clearTimeout(timeoutId)
+    if (!initialLoadRef.current || !user || (user.role !== 'admin' && user.role !== 'supervisor')) {
+      return
     }
-  }, [filters, fetchUsers, hasInitialLoad, user])
+
+    // Clear existing timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current)
+      searchTimeoutRef.current = null
+    }
+
+    // If search has content, apply debounce
+    if (filters.search.trim()) {
+      setSearching(true)
+
+      searchTimeoutRef.current = setTimeout(() => {
+        fetchUsers(filters)
+      }, 2000)
+    } else {
+      // For role/status changes or empty search, fetch immediately
+      setSearching(false)
+      fetchUsers(filters)
+    }
+
+    // Cleanup function
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+        searchTimeoutRef.current = null
+      }
+    }
+  }, [filters, fetchUsers, user])
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+      }
+    }
+  }, [])
 
   // Check if user has permission to view this page
   if (!user || (user.role !== 'admin' && user.role !== 'supervisor')) {
@@ -99,7 +134,6 @@ const UsersList = () => {
   }
 
   const handleStatusChange = async (userId, newStatus) => {
-    console.log('Attempting to change user status:', { userId, newStatus })
     try {
       // Show loading state for this specific user action
       setUsers(prevUsers =>
@@ -108,9 +142,7 @@ const UsersList = () => {
         )
       )
 
-      console.log('Calling changeUserStatus API...')
-      const result = await changeUserStatus(userId, newStatus)
-      console.log('API call successful:', result)
+      await changeUserStatus(userId, newStatus)
       toast.success('User status updated successfully')
 
       // Update the local state
@@ -121,7 +153,6 @@ const UsersList = () => {
       )
     } catch (error) {
       console.error('Error changing user status:', error)
-      console.error('Error details:', error.response?.data)
       toast.error(`Failed to update user status: ${error.response?.data?.msg || error.message}`)
 
       // Remove loading state on error
@@ -249,6 +280,44 @@ const UsersList = () => {
       ...prev,
       [name]: value
     }))
+
+    // If clearing search, immediately clear searching state
+    if (name === 'search' && !value.trim()) {
+      setSearching(false)
+      // Clear any pending timeout
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+        searchTimeoutRef.current = null
+      }
+    }
+  }
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    if (user && (user.role === 'admin' || user.role === 'supervisor')) {
+      // Clear any pending timeout
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current)
+        searchTimeoutRef.current = null
+      }
+      setSearching(false)
+      fetchUsers(filters)
+    }
+  }
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      if (user && (user.role === 'admin' || user.role === 'supervisor')) {
+        // Clear any pending timeout
+        if (searchTimeoutRef.current) {
+          clearTimeout(searchTimeoutRef.current)
+          searchTimeoutRef.current = null
+        }
+        setSearching(false)
+        fetchUsers(filters)
+      }
+    }
   }
 
   const getStatusBadgeClass = (status) => {
@@ -283,6 +352,21 @@ const UsersList = () => {
     navigate('/add-user')
   }
 
+  const clearFilters = () => {
+    // Clear any pending timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current)
+      searchTimeoutRef.current = null
+    }
+
+    setFilters({
+      role: '',
+      status: '',
+      search: ''
+    })
+    setSearching(false)
+  }
+
   if (loading) {
     return (
       <div className="users-list-container">
@@ -305,9 +389,26 @@ const UsersList = () => {
           >
             + Add User
           </button>
+          {(filters.role || filters.status || filters.search) && (
+            <button
+              className="clear-filters-btn"
+              onClick={clearFilters}
+              title="Clear all filters"
+            >
+              🗑️ Clear Filters
+            </button>
+          )}
           <button
             className="refresh-btn"
-            onClick={() => fetchUsers()}
+            onClick={() => {
+              // Clear any pending timeout
+              if (searchTimeoutRef.current) {
+                clearTimeout(searchTimeoutRef.current)
+                searchTimeoutRef.current = null
+              }
+              setSearching(false)
+              fetchUsers(filters)
+            }}
             disabled={loading}
           >
             {loading ? 'Loading...' : '↻ Refresh'}
@@ -317,15 +418,27 @@ const UsersList = () => {
 
       <div className="filters-section">
         <div className="filters-row">
-          <div className="filter-group">
+          <div className="filter-group search-group">
             <label>Search Users:</label>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search by name or email..."
-              value={filters.search}
-              onChange={handleFilterChange}
-            />
+            <div className="search-input-container">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search by name or email..."
+                value={filters.search}
+                onChange={handleFilterChange}
+                onKeyPress={handleSearchKeyPress}
+              />
+              <button
+                type="button"
+                className="search-btn"
+                onClick={handleSearchSubmit}
+                title="Search now"
+                disabled={searching}
+              >
+                {searching ? '⏳' : '🔍'}
+              </button>
+            </div>
           </div>
 
           <div className="filter-group">
@@ -362,7 +475,23 @@ const UsersList = () => {
       <div className="users-table-container">
         {users.length === 0 ? (
           <div className="no-users">
-            <p>No users found matching your criteria.</p>
+            {filters.search || filters.role || filters.status ? (
+              <div>
+                <h3>No users found matching your criteria</h3>
+                <p>Try adjusting your search terms or filters.</p>
+                <button className="clear-filters-btn" onClick={clearFilters}>
+                  🗑️ Clear All Filters
+                </button>
+              </div>
+            ) : (
+              <div>
+                <h3>No users found</h3>
+                <p>There are no users in the system yet.</p>
+                <button className="add-user-btn" onClick={handleAddUser}>
+                  + Add First User
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <table className="users-table">
@@ -480,7 +609,19 @@ const UsersList = () => {
       </div>
 
       <div className="users-summary">
-        <p>Total Users: {users.length}</p>
+        <div className="summary-stats">
+          <span className="total-count">Total Users: {users.length}</span>
+          {(filters.role || filters.status || filters.search) && (
+            <span className="filtered-info">
+              (Filtered from all users)
+            </span>
+          )}
+        </div>
+        {filters.search && (
+          <div className="search-info">
+            <small>Search results for: "{filters.search}"</small>
+          </div>
+        )}
       </div>
     </div>
   )

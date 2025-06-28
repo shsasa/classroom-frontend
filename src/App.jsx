@@ -1,10 +1,11 @@
 import './styles/App.css'
 import './styles/theme.css'
-import { useContext, useEffect, useCallback } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router'
 import { AuthContext } from './context/AuthContext'
 import { CheckSession } from './services/Auth'
 import Nav from './components/Nav'
+import Sidebar from './components/Sidebar'
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import AddUser from './pages/AddUser'
@@ -17,6 +18,7 @@ import EditCourse from './pages/EditCourse'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Check for token on app load - only once
   useEffect(() => {
@@ -40,16 +42,34 @@ const App = () => {
     checkSession()
   }, [login, logout, user])
 
-  // Handle logout and clear local storage
-  const handleLogOut = useCallback(() => {
-    logout()
-    localStorage.clear()
-  }, [logout])
+  // Toggle sidebar
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+
+  // Close sidebar
+  const closeSidebar = () => {
+    setSidebarOpen(false)
+  }
+
+  // Close sidebar with Escape key
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && sidebarOpen) {
+        closeSidebar()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [sidebarOpen])
 
   return (
-    <>
-      <Nav handleLogOut={handleLogOut} />
-      <main>
+    <div className="app">
+      <Nav onToggleSidebar={toggleSidebar} onCloseSidebar={closeSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+
+      <div className={`main-content ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
@@ -63,8 +83,8 @@ const App = () => {
 
           {/* <Route path="/profile" element={<Profile />} /> */}
         </Routes>
-      </main>
-    </>
+      </div>
+    </div>
   )
 }
 

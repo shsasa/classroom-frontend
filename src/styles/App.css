@@ -6,9 +6,32 @@ body {
   min-height: 100vh;
 }
 
-main {
-  min-height: 80vh;
-  padding: 2rem 0;
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  min-height: calc(100vh - 60px);
+  padding: 2rem;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-open {
+  margin-left: 250px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .main-content.sidebar-open {
+    margin-left: 0;
+  }
 }
 
 button,

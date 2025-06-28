@@ -89,7 +89,7 @@ export const changeUserRole = async (id, role) => {
       throw new Error('No token found')
     }
 
-    const response = await api.patch(`/users/${id}/role`, { role })
+    const response = await api.put(`/users/${id}/role`, { role })
     return response.data
   } catch (error) {
     console.error('Error changing user role:', error)
@@ -101,23 +101,14 @@ export const changeUserRole = async (id, role) => {
 export const changeUserStatus = async (id, accountStatus) => {
   try {
     const token = localStorage.getItem('token')
-    console.log('Token from localStorage:', token ? 'Token exists' : 'No token found')
-
     if (!token) {
       throw new Error('No token found')
     }
 
-    console.log('Making API call to change user status:', { id, accountStatus })
-
-    // Remove manual headers since api.js interceptor handles it
-    const response = await api.patch(`/users/${id}/status`, { accountStatus })
-
-    console.log('API response:', response.data)
+    const response = await api.put(`/users/${id}/status`, { accountStatus })
     return response.data
   } catch (error) {
     console.error('Error changing user status:', error)
-    console.error('Error response:', error.response?.data)
-    console.error('Error status:', error.response?.status)
     throw error
   }
 }
