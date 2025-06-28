@@ -10,6 +10,10 @@ import Home from './pages/Home'
 import AddUser from './pages/AddUser'
 import UsersList from './pages/UsersList'
 import ActivateAccount from './pages/ActivateAccount'
+import AddCourse from './pages/AddCourse'
+import CoursesList from './pages/CoursesList'
+import CourseDetails from './pages/CourseDetails'
+import EditCourse from './pages/EditCourse'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
@@ -52,6 +56,10 @@ const App = () => {
           <Route path="/add-user" element={<AddUser />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/activate-account" element={<ActivateAccount />} />
+          <Route path="/courses" element={<CoursesList />} />
+          <Route path="/add-course" element={<AddCourse />} />
+          <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/edit-course/:id" element={<EditCourse />} />
 
           {/* <Route path="/profile" element={<Profile />} /> */}
         </Routes>

@@ -20,6 +20,7 @@ const Nav = () => {
           <>
             <span>Welcome, {user.name || user.email}</span>
             <Link to="/">Home</Link>
+            <Link to="/courses">Courses</Link>
             {(user.role === 'admin' || user.role === 'supervisor') && (
               <Link to="/users">Manage Users</Link>
             )}

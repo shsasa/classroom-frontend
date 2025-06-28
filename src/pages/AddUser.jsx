@@ -38,6 +38,9 @@ const AddUser = () => {
   return (
     <div className="adduser-container">
       <h2 className="adduser-title">Add New User</h2>
+      <p className="adduser-description">
+        Create a new user account. The user will receive an activation link to set their password.
+      </p>
       <form onSubmit={handleSubmit} autoComplete="on">
         <div className="input-wrapper">
           <label htmlFor="name">Name</label>
@@ -72,6 +75,7 @@ const AddUser = () => {
           >
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
+            <option value="supervisor">Supervisor</option>
             <option value="admin">Admin</option>
           </select>
         </div>
