@@ -21,7 +21,7 @@ const AddUser = () => {
     setLoading(true);
 
     try {
-      const response = await Client.post('/auth/add-user', formValues);
+      await Client.post('/users', formValues);
       toast.success('User added successfully! They will receive an email to set their password.');
       setFormValues(initialState);
     } catch (error) {

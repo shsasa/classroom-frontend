@@ -3,14 +3,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+  background: linear-gradient(135deg, var(--bg-red-lightest) 0%, var(--bg-red-light) 100%);
   padding: 20px;
 }
 
 .activate-account-card {
   background: white;
   border-radius: 14px;
-  box-shadow: 0 2px 16px rgba(183, 28, 28, 0.10);
+  box-shadow: var(--shadow-red);
   padding: 40px;
   width: 100%;
   max-width: 450px;
@@ -35,7 +35,7 @@
 }
 
 .activate-account-header h2 {
-  color: #b71c1c;
+  color: var(--primary-red);
   margin-bottom: 8px;
   font-size: 28px;
   font-weight: 600;

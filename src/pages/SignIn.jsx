@@ -62,7 +62,7 @@ const SignIn = () => {
       </form>
 
       <div className="forgot-password-link">
-        <Link to="/reset-password" className="link">
+        <Link to="/forgot-password" className="link">
           Forgot your password?
         </Link>
       </div>

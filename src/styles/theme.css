@@ -1,24 +1,33 @@
-/* Global Red Theme Variables */
+/* Global Theme Variables - Updated Color Palette */
 :root {
-  /* Primary Red Colors */
-  --primary-red: #d32f2f;
-  --primary-red-dark: #b71c1c;
-  --primary-red-light: #dc3545;
-  --primary-red-lighter: #f44336;
+  /* Primary Colors from Color Palette */
+  --primary-red: #B1422C;
+  --primary-red-dark: #864538;
+  --primary-red-bright: #DC3412;
+  --primary-brown: #5C3C35;
+  --primary-dark: #332E2D;
+
+  /* Lighter variations */
+  --primary-red-light: #C55A47;
+  --primary-red-lighter: #E67D66;
 
   /* Background Colors */
-  --bg-red-light: #fff5f5;
-  --bg-red-lighter: #ffebee;
-  --bg-red-lightest: #fce4ec;
+  --bg-red-light: #FDF6F4;
+  --bg-red-lighter: #FAF0ED;
+  --bg-red-lightest: #F7EBE7;
+  --bg-dark: #332E2D;
 
   /* Border Colors */
-  --border-red: #ffcdd2;
-  --border-red-dark: #f8bbd9;
+  --border-red: #E67D66;
+  --border-red-dark: #C55A47;
+  --border-light: #E5E5E5;
 
   /* Text Colors */
-  --text-red: #d32f2f;
-  --text-red-dark: #b71c1c;
-  --text-secondary: #6c757d;
+  --text-primary: #332E2D;
+  --text-secondary: #5C3C35;
+  --text-red: #B1422C;
+  --text-red-bright: #DC3412;
+  --text-muted: #6c757d;
 
   /* Success Colors (Green) */
   --success-bg: #e8f5e8;

@@ -1,190 +1,255 @@
-import React, { useState, useEffect } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
-import { resetPassword } from '../services/users'
-import { toast } from 'react-toastify'
-import '../styles/ResetPassword.css'
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Navigate, useNavigate } from 'react-router-dom';
+import api from '../services/api';
+import '../styles/ResetPassword.css';
 
 const ResetPassword = () => {
-  const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const token = searchParams.get('token');
+
   const [formData, setFormData] = useState({
-    resetToken: '',
-    password: '',
+    newPassword: '',
     confirmPassword: ''
-  })
-  const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState(1) // 1: Enter token, 2: Set password
-  const urlToken = searchParams.get('token')
+  });
+  const [loading, setLoading] = useState(false);
+  const [verifying, setVerifying] = useState(true);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [tokenValid, setTokenValid] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const [resetSuccess, setResetSuccess] = useState(false);
 
+  // Check if user is already logged in
+  const authToken = localStorage.getItem('token');
+
+  // Verify token on component mount
   useEffect(() => {
-    // If token is provided in URL, set it and go to step 2
-    if (urlToken) {
-      setFormData(prev => ({ ...prev, resetToken: urlToken }))
-      setStep(2)
-    }
-  }, [urlToken])
+    const verifyToken = async () => {
+      if (!token) {
+        setError('Invalid reset link. No token provided.');
+        setVerifying(false);
+        return;
+      }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+      try {
+        const response = await api.get(`/users/reset-password/verify?token=${token}`);
+
+        if (response.data.status === 'Success') {
+          setTokenValid(true);
+          setUserInfo(response.data.user);
+        } else {
+          setError(response.data.msg || 'Invalid or expired reset token.');
+        }
+      } catch (error) {
+        console.error('Token verification error:', error);
+        setError(
+          error.response?.data?.msg ||
+          'Invalid or expired reset token.'
+        );
+      } finally {
+        setVerifying(false);
+      }
+    };
+
+    verifyToken();
+  }, [token]);
+
+  // If user is already logged in, redirect to dashboard
+  if (authToken) {
+    return <Navigate to="/dashboard" replace />;
   }
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    // Clear errors when user starts typing
+    if (error) setError('');
+  };
+
+  const validateForm = () => {
+    if (!formData.newPassword) {
+      setError('Please enter a new password');
+      return false;
+    }
+
+    if (formData.newPassword.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return false;
+    }
+
+    if (formData.newPassword !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    // Step 1: Verify token
-    if (step === 1) {
-      if (!formData.resetToken.trim()) {
-        toast.error('Please enter reset token')
-        return
-      }
+    if (!validateForm()) return;
 
-      // Move to password setting step
-      setStep(2)
-      return
-    }
+    setLoading(true);
+    setError('');
+    setMessage('');
 
-    // Step 2: Reset password
-    if (!formData.resetToken.trim()) {
-      toast.error('Reset token is required')
-      return
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match')
-      return
-    }
-
-    if (formData.password.length < 6) {
-      toast.error('Password must be at least 6 characters long')
-      return
-    }
-
-    setLoading(true)
     try {
-      await resetPassword(formData.resetToken, formData.password)
-      toast.success('Password has been reset successfully!')
-      navigate('/signin', {
-        state: {
-          message: 'Password reset successful. You can now log in with your new password.'
-        }
-      })
-    } catch (error) {
-      console.error('Error resetting password:', error)
-      if (error.response?.status === 400) {
-        toast.error('Invalid or expired reset token')
-        setStep(1) // Go back to token entry
+      const response = await api.post('/users/reset-password', {
+        token,
+        newPassword: formData.newPassword
+      });
+
+      if (response.data.status === 'Success') {
+        setMessage(response.data.msg);
+        setResetSuccess(true);
+        // Redirect to login after 3 seconds
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       } else {
-        toast.error('Failed to reset password. Please try again.')
+        setError(response.data.msg || 'Failed to reset password');
       }
+    } catch (error) {
+      console.error('Password reset error:', error);
+      setError(
+        error.response?.data?.msg ||
+        'Failed to reset password. Please try again.'
+      );
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
+  };
+
+  // Loading state while verifying token
+  if (verifying) {
+    return (
+      <div className="reset-password-container">
+        <div className="reset-password-card">
+          <div className="loading-spinner"></div>
+          <h2>Verifying Reset Link...</h2>
+          <p>Please wait while we verify your password reset link.</p>
+        </div>
+      </div>
+    );
   }
 
+  // Success state
+  if (resetSuccess) {
+    return (
+      <div className="reset-password-container">
+        <div className="reset-password-card">
+          <div className="success-icon">✅</div>
+          <h2>Password Reset Successful</h2>
+          <p className="success-message">
+            Your password has been reset successfully!
+          </p>
+          <p className="instruction">
+            You will be redirected to the login page in a few seconds...
+          </p>
+          <button
+            onClick={() => navigate('/login')}
+            className="login-btn"
+          >
+            Go to Login Now
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Invalid token state
+  if (!tokenValid) {
+    return (
+      <div className="reset-password-container">
+        <div className="reset-password-card">
+          <div className="error-icon">❌</div>
+          <h2>Invalid Reset Link</h2>
+          <p className="error-message">{error}</p>
+          <p className="instruction">
+            The password reset link may have expired or is invalid.
+            Please request a new password reset.
+          </p>
+          <button
+            onClick={() => navigate('/forgot-password')}
+            className="forgot-btn"
+          >
+            Request New Reset Link
+          </button>
+          <div className="back-to-login">
+            <a href="/login">Back to Login</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Reset form state
   return (
     <div className="reset-password-container">
       <div className="reset-password-card">
-        <div className="reset-password-header">
-          <h2>Reset Your Password</h2>
-          <p>
-            {step === 1
-              ? 'Enter the reset token provided by your administrator'
-              : 'Enter your new password below'
-            }
+        <h2>Reset Your Password</h2>
+        {userInfo && (
+          <p className="user-info">
+            Resetting password for: <strong>{userInfo.name}</strong> ({userInfo.email})
           </p>
-        </div>
+        )}
+        <p className="instruction">
+          Enter your new password below.
+        </p>
 
-        <form onSubmit={handleSubmit} className="reset-password-form">
-          {step === 1 && (
-            <div className="form-group">
-              <label htmlFor="resetToken">Reset Token</label>
-              <input
-                type="text"
-                id="resetToken"
-                name="resetToken"
-                value={formData.resetToken}
-                onChange={handleChange}
-                required
-                placeholder="Enter reset token"
-                disabled={loading}
-              />
-            </div>
-          )}
-
-          {step === 2 && (
-            <>
-              <div className="form-group">
-                <label htmlFor="password">New Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  minLength={6}
-                  placeholder="Enter new password"
-                  disabled={loading}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm New Password</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                  minLength={6}
-                  placeholder="Confirm new password"
-                  disabled={loading}
-                />
-              </div>
-            </>
-          )}
-
-          <div className="form-actions">
-            <button
-              type="submit"
-              className="submit-btn"
-              disabled={loading || (step === 1 && !formData.resetToken) || (step === 2 && (!formData.password || !formData.confirmPassword))}
-            >
-              {loading
-                ? (step === 1 ? 'Verifying...' : 'Resetting...')
-                : (step === 1 ? 'Verify Token' : 'Reset Password')
-              }
-            </button>
-
-            {step === 2 && (
-              <button
-                type="button"
-                className="back-btn"
-                onClick={() => setStep(1)}
-                disabled={loading}
-              >
-                Back to Token Entry
-              </button>
-            )}
-
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={() => navigate('/signin')}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="newPassword">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              value={formData.newPassword}
+              onChange={handleInputChange}
+              placeholder="Enter your new password"
+              required
               disabled={loading}
-            >
-              Cancel
-            </button>
+              minLength={6}
+            />
           </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm New Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Confirm your new password"
+              required
+              disabled={loading}
+              minLength={6}
+            />
+          </div>
+
+          {error && <div className="error-message">{error}</div>}
+          {message && <div className="success-message">{message}</div>}
+
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={loading}
+          >
+            {loading ? 'Resetting...' : 'Reset Password'}
+          </button>
         </form>
+
+        <div className="back-to-login">
+          <a href="/login">Back to Login</a>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

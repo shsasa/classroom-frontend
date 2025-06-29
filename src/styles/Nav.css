@@ -1,12 +1,12 @@
-/* Nav Bar Styles - Elegant Red Theme */
+/* Nav Bar Styles - Updated Color Palette */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #8b1538 0%, #a91d47 100%);
+  background: linear-gradient(90deg, #B1422C 0%, #DC3412 100%);
   color: #fff;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 8px rgba(139, 21, 56, 0.15);
+  box-shadow: 0 2px 8px rgba(177, 66, 44, 0.2);
   position: relative;
   z-index: 900;
 }
@@ -91,7 +91,7 @@
 }
 
 .logout-btn {
-  background: #7f1d1d;
+  background: #864538;
   color: #fff;
   border: none;
   padding: 0.5rem 1.2rem;
@@ -102,7 +102,7 @@
 }
 
 .logout-btn:hover {
-  background: #6b1a1a;
+  background: #5C3C35;
 }
 
 .signin-link {

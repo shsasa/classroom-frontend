@@ -79,6 +79,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       roles: ['admin', 'supervisor', 'teacher']
     },
     {
+      path: '/email-test',
+      icon: '📧',
+      label: 'Email Testing',
+      roles: ['admin', 'supervisor']
+    },
+    {
       path: '/profile',
       icon: '⚙️',
       label: 'Profile Settings',

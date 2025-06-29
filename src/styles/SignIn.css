@@ -1,10 +1,10 @@
-/* SignIn Page Styles - Red Theme */
+/* SignIn Page Styles - Updated Color Palette */
 .signin {
   max-width: 400px;
   margin: 3rem auto;
-  background: #fff5f5;
+  background: #FDF6F4;
   border-radius: 14px;
-  box-shadow: 0 2px 16px rgba(183, 28, 28, 0.10);
+  box-shadow: 0 2px 16px rgba(177, 66, 44, 0.15);
   padding: 2.5rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@
 }
 
 .signin-text {
-  color: #b71c1c;
+  color: #B1422C;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;

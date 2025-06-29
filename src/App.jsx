@@ -15,6 +15,9 @@ import AddCourse from './pages/AddCourse'
 import CoursesList from './pages/CoursesList'
 import CourseDetails from './pages/CourseDetails'
 import EditCourse from './pages/EditCourse'
+import EmailTest from './pages/EmailTest'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
@@ -80,6 +83,9 @@ const App = () => {
           <Route path="/add-course" element={<AddCourse />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
           <Route path="/edit-course/:id" element={<EditCourse />} />
+          <Route path="/email-test" element={<EmailTest />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* <Route path="/profile" element={<Profile />} /> */}
         </Routes>
