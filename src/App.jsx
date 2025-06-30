@@ -22,6 +22,10 @@ import AnnouncementsList from './pages/AnnouncementsList'
 import AddAnnouncement from './pages/AddAnnouncement'
 import EditAnnouncement from './pages/EditAnnouncement'
 import AnnouncementDetails from './pages/AnnouncementDetails'
+import BatchesList from './pages/BatchesList'
+import AddBatch from './pages/AddBatch'
+import BatchDetails from './pages/BatchDetails'
+import EditBatch from './pages/EditBatch'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
@@ -91,6 +95,10 @@ const App = () => {
           <Route path="/announcements/add" element={<AddAnnouncement />} />
           <Route path="/announcements/edit/:id" element={<EditAnnouncement />} />
           <Route path="/announcements/:id" element={<AnnouncementDetails />} />
+          <Route path="/batches" element={<BatchesList />} />
+          <Route path="/batches/add" element={<AddBatch />} />
+          <Route path="/batches/:id" element={<BatchDetails />} />
+          <Route path="/batches/edit/:id" element={<EditBatch />} />
           <Route path="/email-test" element={<EmailTest />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />

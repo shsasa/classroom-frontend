@@ -5,51 +5,19 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
+  color-scheme: light;
+  color: #332E2D;
+  /* Fixed text color */
+  background-color: #F8F9FA;
+  /* Fixed background color */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Primary Red Color Palette */
-  --primary-red: #B1422C;
-  --primary-red-bright: #D84D3A;
-  --primary-red-dark: #8B2E1F;
-  --primary-red-light: #E66B5A;
+  /* Removing variable overrides - using theme.css instead */
 
-  /* Background Colors */
-  --bg-red-lightest: #FEF7F6;
-  --bg-red-lighter: #FCECEA;
-  --bg-red-light: #F9E2DF;
-
-  /* Text Colors */
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
-  --text-muted: #6b7280;
-
-  /* Border Colors */
-  --border-light: #e5e7eb;
-  --border-red: rgba(177, 66, 44, 0.2);
-
-  /* Status Colors */
-  --success-bg: #d1fae5;
-  --success-text: #065f46;
-  --success-border: #6ee7b7;
-
-  --warning-bg: #fef3c7;
-  --warning-text: #92400e;
-  --warning-border: #fcd34d;
-
-  --error-bg: #fee2e2;
-  --error-text: #dc2626;
-  --error-border: #fca5a5;
-
-  /* Shadows */
-  --shadow-red: 0 4px 12px rgba(177, 66, 44, 0.1);
-  --shadow-red-hover: 0 6px 20px rgba(177, 66, 44, 0.15);
 }
 
 a {
@@ -64,10 +32,12 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: #F8F9FA !important;
+  /* Fixed background */
+  color: #332E2D !important;
+  /* Fixed text color */
 }
 
 h1 {
