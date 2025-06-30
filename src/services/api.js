@@ -2,6 +2,12 @@ import Axios from 'axios'
 
 export const BASE_URL = 'http://localhost:3000'
 
+// Helper function to create full URLs for uploaded files
+export const getFileUrl = (filename) => {
+  if (!filename) return null
+  return `${BASE_URL}/uploads/${filename}`
+}
+
 const Client = Axios.create({
   baseURL: BASE_URL,
 })

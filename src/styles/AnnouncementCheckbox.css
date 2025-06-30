@@ -1,0 +1,105 @@
+/* Announcement Checkbox Styles - Override any conflicting styles */
+
+/* Reset any inherited checkbox styles */
+.add-announcement-form .form-row .checkbox-group {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+}
+
+/* Checkbox label container */
+.add-announcement-form .form-row .checkbox-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  font-size: 15px !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* Hide the default checkbox */
+.add-announcement-form .form-row .checkbox-label input[type="checkbox"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* Custom checkbox appearance */
+.add-announcement-form .form-row .checkmark {
+  height: 22px !important;
+  width: 22px !important;
+  background-color: white !important;
+  border: 2px solid var(--primary-red) !important;
+  border-radius: 4px !important;
+  position: relative !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0 !important;
+}
+
+/* Hover effect */
+.add-announcement-form .form-row .checkbox-label:hover input~.checkmark {
+  background-color: var(--bg-red-light) !important;
+  border-color: var(--primary-red-dark) !important;
+}
+
+/* Checked state */
+.add-announcement-form .form-row .checkbox-label input:checked~.checkmark {
+  background-color: var(--primary-red) !important;
+  border-color: var(--primary-red) !important;
+}
+
+/* Checkmark icon */
+.add-announcement-form .form-row .checkmark:after {
+  content: "" !important;
+  position: absolute !important;
+  display: none !important;
+}
+
+/* Show checkmark when checked */
+.add-announcement-form .form-row .checkbox-label input:checked~.checkmark:after {
+  display: block !important;
+  left: 7px !important;
+  top: 3px !important;
+  width: 5px !important;
+  height: 10px !important;
+  border: solid white !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Small text under checkbox */
+.add-announcement-form .form-row .checkbox-group small {
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+  margin-left: 34px !important;
+  display: block !important;
+  line-height: 1.4 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .add-announcement-form .form-row .checkbox-group small {
+    margin-left: 34px !important;
+    font-size: 12px !important;
+  }
+
+  .add-announcement-form .form-row .checkbox-label {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-announcement-form .form-row .checkbox-label {
+    font-size: 13px !important;
+  }
+}

@@ -1,0 +1,253 @@
+/* Shared Components CSS - Resolves project CSS conflicts */
+
+/* =================================
+   SHARED BUTTON STYLES
+   ================================= */
+
+/* Primary Submit Button */
+.btn-submit-primary {
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  flex: 1;
+  box-shadow: var(--shadow-red);
+  letter-spacing: 0.5px;
+}
+
+.btn-submit-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-red-dark) 0%, var(--primary-brown) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-red-hover);
+}
+
+.btn-submit-primary:disabled {
+  background: var(--error-border);
+  color: var(--primary-red);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Secondary Cancel Button */
+.btn-cancel-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-light);
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  flex: 1;
+}
+
+.btn-cancel-secondary:hover:not(:disabled) {
+  border-color: var(--primary-red);
+  color: var(--primary-red);
+  background: var(--bg-red-lighter);
+  transform: translateY(-1px);
+}
+
+.btn-cancel-secondary:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* =================================
+   SHARED FORM STYLES
+   ================================= */
+
+/* Form Group Base */
+.form-group-base {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group-base label {
+  font-weight: 700;
+  color: var(--text-red);
+  font-size: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.form-group-base input,
+.form-group-base textarea,
+.form-group-base select {
+  padding: 14px 18px;
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.form-group-base input:focus,
+.form-group-base textarea:focus,
+.form-group-base select:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 4px var(--primary-red-light);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Form Row Layout */
+.form-row-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 15px 0;
+  padding: 25px;
+  background: var(--bg-red-lighter);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.form-row-layout:hover {
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* =================================
+   SHARED CHECKBOX STYLES
+   ================================= */
+
+/* Checkbox Container */
+.checkbox-container-shared {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+/* Checkbox Label */
+.checkbox-label-shared {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  font-size: 15px !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* Hide Default Checkbox */
+.checkbox-label-shared input[type="checkbox"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* Custom Checkbox Appearance */
+.checkbox-mark-shared {
+  height: 22px !important;
+  width: 22px !important;
+  background-color: white !important;
+  border: 2px solid var(--primary-red) !important;
+  border-radius: 4px !important;
+  position: relative !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0 !important;
+}
+
+/* Checkbox Hover */
+.checkbox-label-shared:hover input~.checkbox-mark-shared {
+  background-color: var(--bg-red-light) !important;
+  border-color: var(--primary-red-dark) !important;
+}
+
+/* Checkbox Checked */
+.checkbox-label-shared input:checked~.checkbox-mark-shared {
+  background-color: var(--primary-red) !important;
+  border-color: var(--primary-red) !important;
+}
+
+/* Checkmark Icon */
+.checkbox-mark-shared:after {
+  content: "" !important;
+  position: absolute !important;
+  display: none !important;
+}
+
+.checkbox-label-shared input:checked~.checkbox-mark-shared:after {
+  display: block !important;
+  left: 7px !important;
+  top: 3px !important;
+  width: 5px !important;
+  height: 10px !important;
+  border: solid white !important;
+  border-width: 0 2px 2px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Checkbox Small Text */
+.checkbox-description-shared {
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+  margin-top: 4px !important;
+  margin-left: 34px !important;
+  display: block !important;
+  line-height: 1.4 !important;
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+   ================================= */
+
+@media (max-width: 768px) {
+  .form-row-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .btn-submit-primary,
+  .btn-cancel-secondary {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+
+  .checkbox-description-shared {
+    margin-left: 34px !important;
+    font-size: 12px !important;
+  }
+
+  .checkbox-label-shared {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkbox-label-shared {
+    font-size: 13px !important;
+  }
+
+  .form-group-base input,
+  .form-group-base textarea,
+  .form-group-base select {
+    font-size: 14px;
+  }
+}

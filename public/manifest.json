@@ -1,0 +1,16 @@
+{
+  "name": "Classroom Manager",
+  "short_name": "ClassroomMgr",
+  "description": "A comprehensive classroom management system",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#DC3412",
+  "theme_color": "#DC3412",
+  "icons": [
+    {
+      "src": "/classroom-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

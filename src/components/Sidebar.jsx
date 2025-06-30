@@ -117,8 +117,8 @@ const Sidebar = ({ isOpen, onClose }) => {
       <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>
         <div className="sidebar__header">
           <div className="sidebar__logo">
-            <span className="sidebar__logo-icon">🎯</span>
-            <h3 className="sidebar__logo-text">Classroom</h3>
+            <span className="sidebar__logo-icon">📚</span>
+            <h3 className="sidebar__logo-text">Classroom Manager</h3>
           </div>
           <button
             className="sidebar__close-btn"

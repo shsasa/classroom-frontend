@@ -5,14 +5,14 @@
   left: 0;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(180deg, var(--primary-red) 0%, var(--primary-red-bright) 100%);
-  color: white;
+  background: var(--sidebar-bg-gradient);
+  color: var(--sidebar-text);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 0 10px rgba(177, 66, 44, 0.2);
+  box-shadow: var(--shadow-xl);
   overflow-y: auto;
 }
 
@@ -26,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.1);
 }
 
@@ -38,19 +38,21 @@
 
 .sidebar__logo-icon {
   font-size: 1.5rem;
+  color: var(--sidebar-text);
 }
 
 .sidebar__logo-text {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
-  color: white;
+  color: var(--sidebar-text);
+  white-space: nowrap;
 }
 
 .sidebar__close-btn {
   background: none;
   border: none;
-  color: white;
+  color: var(--sidebar-text);
   font-size: 1.25rem;
   cursor: pointer;
   padding: 0.25rem;
@@ -59,13 +61,13 @@
 }
 
 .sidebar__close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--sidebar-item-hover);
 }
 
 /* User Info */
 .sidebar__user-info {
   padding: 1.5rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -75,13 +77,14 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--sidebar-item-hover);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 1.25rem;
   flex-shrink: 0;
+  color: var(--sidebar-text);
 }
 
 .sidebar__avatar img {
@@ -100,7 +103,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
-  color: white;
+  color: var(--sidebar-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -115,23 +118,23 @@
 }
 
 .sidebar__user-role--admin {
-  background: var(--primary-dark);
-  color: white;
+  background: var(--primary-darkest);
+  color: var(--sidebar-text);
 }
 
 .sidebar__user-role--supervisor {
-  background: var(--primary-brown);
-  color: white;
+  background: var(--primary-brown-dark);
+  color: var(--sidebar-text);
 }
 
 .sidebar__user-role--teacher {
-  background: var(--primary-red);
-  color: white;
+  background: var(--primary-brown);
+  color: var(--sidebar-text);
 }
 
 .sidebar__user-role--student {
-  background: var(--primary-red-bright);
-  color: white;
+  background: var(--sidebar-item-active);
+  color: var(--sidebar-text);
 }
 
 /* Navigation */
@@ -155,7 +158,7 @@
   align-items: center;
   gap: 1rem;
   padding: 0.875rem 1.5rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--sidebar-text-muted);
   text-decoration: none;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
@@ -163,15 +166,15 @@
 }
 
 .sidebar__menu-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-left-color: rgba(255, 255, 255, 0.3);
+  background: var(--sidebar-item-hover);
+  color: var(--sidebar-text);
+  border-left-color: rgba(255, 255, 255, 0.4);
 }
 
 .sidebar__menu-link--active {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  border-left-color: #E67D66;
+  background: var(--sidebar-item-active);
+  color: var(--sidebar-text);
+  border-left-color: var(--text-white);
   font-weight: 600;
 }
 
@@ -192,7 +195,7 @@
 /* Footer */
 .sidebar__footer {
   padding: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.1);
 }
 

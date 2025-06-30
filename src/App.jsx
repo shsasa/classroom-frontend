@@ -18,6 +18,10 @@ import EditCourse from './pages/EditCourse'
 import EmailTest from './pages/EmailTest'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
+import AnnouncementsList from './pages/AnnouncementsList'
+import AddAnnouncement from './pages/AddAnnouncement'
+import EditAnnouncement from './pages/EditAnnouncement'
+import AnnouncementDetails from './pages/AnnouncementDetails'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
@@ -83,6 +87,10 @@ const App = () => {
           <Route path="/add-course" element={<AddCourse />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
           <Route path="/edit-course/:id" element={<EditCourse />} />
+          <Route path="/announcements" element={<AnnouncementsList />} />
+          <Route path="/announcements/add" element={<AddAnnouncement />} />
+          <Route path="/announcements/edit/:id" element={<EditAnnouncement />} />
+          <Route path="/announcements/:id" element={<AnnouncementDetails />} />
           <Route path="/email-test" element={<EmailTest />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
