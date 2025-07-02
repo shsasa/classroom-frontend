@@ -104,7 +104,7 @@ const CourseDetails = () => {
     <div className="course-details-container">
       {/* Header */}
       <div className="course-details-header">
-        <div className="header-content">
+        <div className="course-details-header-content">
           <div className="header-info">
             <div className="breadcrumb">
               <Link to="/courses">Courses</Link>

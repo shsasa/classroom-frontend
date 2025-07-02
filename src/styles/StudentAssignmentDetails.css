@@ -32,7 +32,7 @@
   color: #111827;
 }
 
-.header-content {
+.student-assignment-details-header-content {
   background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
   color: white;
   padding: 30px;
@@ -503,7 +503,7 @@
     padding: 15px;
   }
 
-  .header-content {
+  .student-assignment-details-header-content {
     padding: 25px 20px;
   }
 

@@ -378,7 +378,7 @@ const UsersList = () => {
   return (
     <div className="users-list-container">
       <div className="users-list-header">
-        <div className="header-content">
+        <div className="users-header-content">
           <h1>Users Management</h1>
           <p>Manage all users in the system</p>
         </div>

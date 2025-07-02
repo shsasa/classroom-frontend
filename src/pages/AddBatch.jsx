@@ -86,7 +86,7 @@ const AddBatch = () => {
   return (
     <div className="add-batch-container">
       <div className="add-batch-header">
-        <div className="header-content">
+        <div className="add-batch-header-content">
           <div>
             <h1>Add New Batch</h1>
             <p>Create a new student batch with schedule and enrollment details</p>

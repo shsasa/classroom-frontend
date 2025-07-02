@@ -144,7 +144,7 @@ const TeacherAssignments = () => {
     <div className="teacher-assignments-container">
       {/* Header */}
       <div className="assignments-header">
-        <div className="header-content">
+        <div className="teacher-assignments-header-content">
           <h1>My Assignments</h1>
           <p>Manage all assignments you've created for your courses</p>
         </div>

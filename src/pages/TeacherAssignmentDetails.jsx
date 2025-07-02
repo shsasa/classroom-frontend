@@ -154,7 +154,7 @@ const TeacherAssignmentDetails = () => {
           ← Back to Assignments
         </button>
 
-        <div className="header-content">
+        <div className="teacher-assignment-details-header-content">
           <div className="title-section">
             <h1>{assignment.title}</h1>
             <div className={`status-badge ${statusDisplay.class}`}>

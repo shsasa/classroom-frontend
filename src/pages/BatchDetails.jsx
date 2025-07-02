@@ -244,7 +244,7 @@ const BatchDetails = () => {
     <div className="batch-details-container">
       {/* Header Section */}
       <div className="batch-header">
-        <div className="header-content">
+        <div className="batch-details-header-content">
           <div className="header-main">
             <div className="header-info">
               <h1>{batch.name}</h1>

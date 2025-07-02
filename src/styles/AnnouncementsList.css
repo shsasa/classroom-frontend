@@ -34,14 +34,14 @@
   background: var(--sidebar-bg-gradient);
 }
 
-.header-content {
+.announcements-header-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
 }
 
-.header-content h1 {
+.announcements-header-content h1 {
   color: var(--text-red);
   font-size: 3.2rem;
   margin: 0;
@@ -54,7 +54,7 @@
   text-shadow: 0 2px 4px rgba(220, 52, 18, 0.1);
 }
 
-.header-content p {
+.announcements-header-content p {
   color: var(--text-secondary);
   font-size: 1.3rem;
   margin: 0;
@@ -586,12 +586,12 @@
     padding: 30px;
   }
 
-  .header-content {
+  .announcements-header-content {
     align-items: center;
     text-align: center;
   }
 
-  .header-content h1 {
+  .announcements-header-content h1 {
     font-size: 2.5rem;
   }
 
@@ -647,7 +647,7 @@
     padding: 25px 20px;
   }
 
-  .header-content h1 {
+  .announcements-header-content h1 {
     font-size: 2rem;
   }
 

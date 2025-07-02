@@ -32,7 +32,7 @@
   color: #111827;
 }
 
-.header-content {
+.teacher-assignment-details-header-content {
   background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
   color: white;
   padding: 30px;
@@ -628,7 +628,7 @@
     padding: 15px;
   }
 
-  .header-content {
+  .teacher-assignment-details-header-content {
     flex-direction: column;
     gap: 15px;
     padding: 25px 20px;

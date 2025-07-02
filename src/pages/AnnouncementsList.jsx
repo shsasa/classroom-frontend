@@ -166,7 +166,7 @@ const AnnouncementsList = () => {
     <ErrorBoundary>
       <div className="announcements-container">
         <div className="announcements-header">
-          <div className="header-content">
+          <div className="announcements-header-content">
             <h1>Announcements</h1>
             <p>Stay updated with the latest news and important updates</p>
           </div>

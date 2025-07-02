@@ -99,7 +99,7 @@ const BatchesList = () => {
   return (
     <div className="batches-container">
       <div className="batches-header">
-        <div className="header-content">
+        <div className="batches-header-content">
           <h1>Batches Management</h1>
           <p>Manage student batches, schedules, and enrollments</p>
         </div>
