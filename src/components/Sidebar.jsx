@@ -76,6 +76,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       roles: ['student']
     },
     {
+      path: '/student/attendance',
+      icon: '📊',
+      label: 'My Attendance',
+      roles: ['student']
+    },
+    {
       path: '/teacher/assignments',
       icon: '📋',
       label: 'My Assignments',

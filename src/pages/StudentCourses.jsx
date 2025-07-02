@@ -70,7 +70,7 @@ const StudentCourses = () => {
     <div className="student-courses-container">
       {/* Header */}
       <div className="courses-header">
-        <div className="header-content">
+        <div className="courses-header-content">
           <h1>
             <span className="header-icon">📚</span>
             My Courses

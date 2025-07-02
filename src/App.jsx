@@ -36,6 +36,8 @@ import StudentAssignments from './pages/StudentAssignments'
 import StudentAssignmentDetails from './pages/StudentAssignmentDetails'
 import TeacherAssignments from './pages/TeacherAssignments'
 import TeacherAssignmentDetails from './pages/TeacherAssignmentDetails'
+import AttendanceManagement from './pages/AttendanceManagement'
+import StudentAttendance from './pages/StudentAttendance'
 import TestPage from './pages/TestPage'
 
 const App = () => {
@@ -121,8 +123,10 @@ const App = () => {
           <Route path="/student/courses/:id" element={<StudentCourseDetails />} />
           <Route path="/student/assignments" element={<StudentAssignments />} />
           <Route path="/student/assignments/:id" element={<StudentAssignmentDetails />} />
+          <Route path="/student/attendance" element={<StudentAttendance />} />
           <Route path="/teacher/assignments" element={<TeacherAssignments />} />
           <Route path="/teacher/assignments/:id" element={<TeacherAssignmentDetails />} />
+          <Route path="/attendance" element={<AttendanceManagement />} />
           <Route path="/test" element={<TestPage />} />
 
         </Routes>
