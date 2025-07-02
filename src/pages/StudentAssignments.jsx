@@ -148,29 +148,29 @@ const StudentAssignments = () => {
         <p>View and manage all your course assignments</p>
 
         {/* Statistics */}
-        <div className="stats-grid">
-          <div className="stat-card total">
+        <div className="student-assignments-stats-grid">
+          <div className="student-assignments-stat-card total">
             <div className="stat-icon">📋</div>
             <div className="stat-content">
               <div className="stat-number">{statusCounts.total}</div>
               <div className="stat-label">Total Assignments</div>
             </div>
           </div>
-          <div className="stat-card pending">
+          <div className="student-assignments-stat-card pending">
             <div className="stat-icon">⏳</div>
             <div className="stat-content">
               <div className="stat-number">{statusCounts.pending}</div>
               <div className="stat-label">Pending</div>
             </div>
           </div>
-          <div className="stat-card urgent">
+          <div className="student-assignments-stat-card urgent">
             <div className="stat-icon">⚡</div>
             <div className="stat-content">
               <div className="stat-number">{statusCounts.urgent}</div>
               <div className="stat-label">Due Soon</div>
             </div>
           </div>
-          <div className="stat-card overdue">
+          <div className="student-assignments-stat-card overdue">
             <div className="stat-icon">⚠️</div>
             <div className="stat-content">
               <div className="stat-number">{statusCounts.overdue}</div>
@@ -234,7 +234,7 @@ const StudentAssignments = () => {
               >
                 <div className="assignment-header">
                   <div className="assignment-title">{assignment.title}</div>
-                  <div className={`status-badge ${status}`}>
+                  <div className={`student-assignments-status-badge ${status}`}>
                     {status === 'overdue' && '⚠️ Overdue'}
                     {status === 'urgent' && '⚡ Due Soon'}
                     {status === 'pending' && '⏳ Pending'}

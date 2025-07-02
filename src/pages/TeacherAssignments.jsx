@@ -132,7 +132,7 @@ const TeacherAssignments = () => {
           <div className="error-icon">❌</div>
           <h3>Error Loading Assignments</h3>
           <p>{error}</p>
-          <button className="btn btn-primary" onClick={fetchTeacherAssignments}>
+          <button className="teacher-assignments-btn teacher-assignments-btn-primary" onClick={fetchTeacherAssignments}>
             Try Again
           </button>
         </div>
@@ -148,35 +148,35 @@ const TeacherAssignments = () => {
           <h1>My Assignments</h1>
           <p>Manage all assignments you've created for your courses</p>
         </div>
-        <Link to="/assignments/create" className="btn btn-primary">
+        <Link to="/assignments/create" className="teacher-assignments-btn teacher-assignments-btn-primary">
           <i className="fas fa-plus"></i> Create New Assignment
         </Link>
       </div>
 
       {/* Statistics */}
-      <div className="stats-grid">
-        <div className="stat-card total">
+      <div className="teacher-assignments-stats-grid">
+        <div className="teacher-assignments-stat-card total">
           <div className="stat-icon">📋</div>
           <div className="stat-content">
             <div className="stat-number">{statusCounts.total}</div>
             <div className="stat-label">Total Assignments</div>
           </div>
         </div>
-        <div className="stat-card active">
+        <div className="teacher-assignments-stat-card active">
           <div className="stat-icon">✅</div>
           <div className="stat-content">
             <div className="stat-number">{statusCounts.active}</div>
             <div className="stat-label">Active</div>
           </div>
         </div>
-        <div className="stat-card urgent">
+        <div className="teacher-assignments-stat-card urgent">
           <div className="stat-icon">⚡</div>
           <div className="stat-content">
             <div className="stat-number">{statusCounts.urgent}</div>
             <div className="stat-label">Due Soon</div>
           </div>
         </div>
-        <div className="stat-card overdue">
+        <div className="teacher-assignments-stat-card overdue">
           <div className="stat-icon">⚠️</div>
           <div className="stat-content">
             <div className="stat-number">{statusCounts.overdue}</div>
@@ -189,25 +189,25 @@ const TeacherAssignments = () => {
       <div className="filters-section">
         <div className="filter-buttons">
           <button
-            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+            className={`teacher-assignments-filter-btn ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
           >
             All ({statusCounts.total})
           </button>
           <button
-            className={`filter-btn ${filter === 'active' ? 'active' : ''}`}
+            className={`teacher-assignments-filter-btn ${filter === 'active' ? 'active' : ''}`}
             onClick={() => setFilter('active')}
           >
             Active ({statusCounts.active})
           </button>
           <button
-            className={`filter-btn ${filter === 'urgent' ? 'active' : ''}`}
+            className={`teacher-assignments-filter-btn ${filter === 'urgent' ? 'active' : ''}`}
             onClick={() => setFilter('urgent')}
           >
             Due Soon ({statusCounts.urgent})
           </button>
           <button
-            className={`filter-btn ${filter === 'overdue' ? 'active' : ''}`}
+            className={`teacher-assignments-filter-btn ${filter === 'overdue' ? 'active' : ''}`}
             onClick={() => setFilter('overdue')}
           >
             Overdue ({statusCounts.overdue})
@@ -227,7 +227,7 @@ const TeacherAssignments = () => {
             }
           </p>
           {filter === 'all' && (
-            <Link to="/assignments/create" className="btn btn-primary">
+            <Link to="/assignments/create" className="teacher-assignments-btn teacher-assignments-btn-primary">
               Create Your First Assignment
             </Link>
           )}
@@ -240,7 +240,7 @@ const TeacherAssignments = () => {
               <div key={assignment._id} className={`assignment-card ${status}`}>
                 <div className="assignment-header">
                   <div className="assignment-title">{assignment.title}</div>
-                  <div className={`status-badge ${status}`}>
+                  <div className={`teacher-assignments-status-badge ${status}`}>
                     {status === 'overdue' && '⚠️ Overdue'}
                     {status === 'urgent' && '⚡ Due Soon'}
                     {status === 'active' && '✅ Active'}
@@ -284,13 +284,13 @@ const TeacherAssignments = () => {
                   <div className="assignment-actions">
                     <Link
                       to={`/teacher/assignments/${assignment._id}`}
-                      className="btn btn-sm btn-secondary"
+                      className="teacher-assignments-btn teacher-assignments-btn-sm teacher-assignments-btn-secondary"
                     >
                       View Details
                     </Link>
                     <Link
                       to={`/assignments/edit/${assignment._id}`}
-                      className="btn btn-sm btn-outline"
+                      className="teacher-assignments-btn teacher-assignments-btn-sm teacher-assignments-btn-outline"
                     >
                       Edit
                     </Link>

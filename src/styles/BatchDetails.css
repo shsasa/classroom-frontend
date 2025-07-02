@@ -49,7 +49,7 @@
 }
 
 /* Header Section */
-.batch-header {
+.batch-details-header {
   background: #FFFFFF;
   border-radius: 16px;
   padding: 2rem;
@@ -98,14 +98,14 @@
   font-weight: 500;
 }
 
-.header-actions {
+.batch-details-header-actions {
   display: flex;
   gap: 1rem;
   flex-shrink: 0;
 }
 
 /* Status Badges */
-.status-badge {
+.batch-details-status-badge {
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -114,25 +114,25 @@
   letter-spacing: 0.5px;
 }
 
-.status-badge.active {
+.batch-details-status-badge.active {
   background: rgba(34, 197, 94, 0.1);
   color: #059669;
   border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.status-badge.upcoming {
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563eb;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+.batch-details-status-badge.upcoming {
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
-.status-badge.completed {
+.batch-details-status-badge.completed {
   background: rgba(107, 114, 128, 0.1);
   color: #6b7280;
   border: 1px solid rgba(107, 114, 128, 0.2);
 }
 
-.status-badge.inactive {
+.batch-details-status-badge.inactive {
   background: rgba(239, 68, 68, 0.1);
   color: #dc2626;
   border: 1px solid rgba(239, 68, 68, 0.2);
@@ -222,14 +222,14 @@
 }
 
 /* Statistics Grid */
-.stats-grid {
+.batch-details-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
 }
 
-.stat-card {
-  background: linear-gradient(135deg, var(--primary-light), #dc3545);
+.batch-details-stat-card {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), #dc3545);
   /* color: white; */
   padding: 1.5rem;
   border-radius: 12px;
@@ -238,12 +238,12 @@
   transition: transform 0.2s ease;
 }
 
-.stat-card:hover {
+.batch-details-stat-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.stat-icon {
+.batch-details-stat-icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   display: block;
@@ -278,8 +278,8 @@
 .course-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0.75rem;
   background: #F8F9FA;
   border-radius: 8px;
   border: 1px solid #E9ECEF;
@@ -288,7 +288,7 @@
 
 .user-item:hover,
 .course-item:hover {
-  background: var(--primary-light);
+  background: rgba(220, 38, 38, 0.05);
 }
 
 .user-actions {
@@ -321,36 +321,37 @@
   transform: scale(1.05);
 }
 
-.user-avatar,
-.course-icon {
-  width: 40px;
-  height: 40px;
+.batch-details-container .user-avatar,
+.batch-details-container .course-icon {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: #dc3545;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   flex-shrink: 0;
 }
 
-.user-info,
-.course-info {
+.batch-details-container .user-info,
+.batch-details-container .course-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.user-name,
-.course-name {
+.batch-details-container .user-name,
+.batch-details-container .course-name {
   color: #332E2D !important;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
-.user-name.clickable,
-.course-name.clickable {
+.batch-details-container .user-name.clickable,
+.batch-details-container .course-name.clickable {
   color: #DC3412 !important;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -358,20 +359,22 @@
   border-radius: 4px;
   padding: 0.25rem 0.5rem;
   margin: -0.25rem -0.5rem;
+  font-size: 0.9rem;
 }
 
-.user-name.clickable:hover,
-.course-name.clickable:hover {
+.batch-details-container .user-name.clickable:hover,
+.batch-details-container .course-name.clickable:hover {
   color: #B1422C !important;
   background: rgba(220, 52, 18, 0.1);
   text-decoration: underline;
   transform: translateX(2px);
 }
 
-.user-role,
-.course-desc {
+.batch-details-container .user-role,
+.batch-details-container .course-desc {
   color: #6C757D;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
 }
 
 /* Schedule Items */
@@ -396,7 +399,7 @@
 .schedule-time {
   color: #332E2D;
   font-weight: 600;
-  background: var(--primary-light);
+  background: rgba(220, 38, 38, 0.1);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -430,7 +433,7 @@
 }
 
 /* Buttons */
-.btn {
+.batch-details-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -445,56 +448,56 @@
   white-space: nowrap;
 }
 
-.btn-sm {
+.batch-details-btn-sm {
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
 }
 
-.btn-primary {
+.batch-details-btn-primary {
   background: #dc3545;
   color: white;
 }
 
-.btn-primary:hover {
-  background: var(--primary-dark);
+.batch-details-btn-primary:hover {
+  background: #b91c1c;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-secondary {
+.batch-details-btn-secondary {
   background: #F8F9FA;
   color: #332E2D;
   border: 1px solid #E9ECEF;
 }
 
-.btn-secondary:hover {
-  background: var(--primary-light);
+.batch-details-btn-secondary:hover {
+  background: rgba(220, 38, 38, 0.05);
   border-color: #dc3545;
 }
 
-.btn-danger {
+.batch-details-btn-danger {
   background: #dc3545;
   color: white;
 }
 
-.btn-danger:hover {
+.batch-details-btn-danger:hover {
   background: #dc2626;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-info {
+.batch-details-btn-info {
   background: #17a2b8;
   color: white;
 }
 
-.btn-info:hover {
+.batch-details-btn-info:hover {
   background: #138496;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-icon {
+.batch-details-btn-icon {
   font-size: 1rem;
 }
 
@@ -520,7 +523,7 @@
     font-size: 2rem;
   }
 
-  .header-actions {
+  .batch-details-header-actions {
     flex-direction: column;
     width: 100%;
   }
@@ -539,7 +542,7 @@
     gap: 1rem;
   }
 
-  .stats-grid {
+  .batch-details-stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
   }
@@ -560,7 +563,7 @@
     font-size: 1.5rem;
   }
 
-  .stats-grid {
+  .batch-details-stats-grid {
     grid-template-columns: 1fr;
   }
 

@@ -92,7 +92,7 @@ const CourseDetails = () => {
           <div className="error-icon">❌</div>
           <h3>Error Loading Course</h3>
           <p>{error || 'Course not found'}</p>
-          <Link to="/courses" className="btn btn-primary">
+          <Link to="/courses" className="course-details-btn course-details-btn-primary">
             Back to Courses
           </Link>
         </div>
@@ -116,29 +116,29 @@ const CourseDetails = () => {
               <p className="course-description">{course.description}</p>
             )}
             <div className="course-status">
-              <span className={`status-badge ${course.isActive ? 'active' : 'inactive'}`}>
+              <span className={`course-details-status-badge ${course.isActive ? 'active' : 'inactive'}`}>
                 {course.isActive ? 'Active' : 'Inactive'}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="header-actions">
-          <Link to="/courses" className="btn btn-secondary">
-            <span className="btn-icon">←</span>
+        <div className="course-details-header-actions">
+          <Link to="/courses" className="course-details-btn course-details-btn-secondary">
+            <span className="course-details-btn-icon">←</span>
             Back to Courses
           </Link>
           {canManageCourses && (
             <>
-              <Link to={`/edit-course/${course._id}`} className="btn btn-primary">
-                <span className="btn-icon">✏️</span>
+              <Link to={`/edit-course/${course._id}`} className="course-details-btn course-details-btn-primary">
+                <span className="course-details-btn-icon">✏️</span>
                 Edit Course
               </Link>
               <button
-                className="btn btn-danger"
+                className="course-details-btn course-details-btn-danger"
                 onClick={handleDelete}
               >
-                <span className="btn-icon">🗑️</span>
+                <span className="course-details-btn-icon">🗑️</span>
                 Delete
               </button>
             </>
@@ -190,22 +190,22 @@ const CourseDetails = () => {
               Statistics
             </h3>
           </div>
-          <div className="stats-grid">
-            <div className="stat-card">
+          <div className="course-details-stats-grid">
+            <div className="course-details-stat-card">
               <div className="stat-icon">👨‍🏫</div>
               <div className="stat-info">
                 <div className="stat-number">{course.teachers?.length || 0}</div>
                 <div className="stat-label">Teachers</div>
               </div>
             </div>
-            <div className="stat-card">
+            <div className="course-details-stat-card">
               <div className="stat-icon">🎓</div>
               <div className="stat-info">
                 <div className="stat-number">{course.batches?.length || 0}</div>
                 <div className="stat-label">Batches</div>
               </div>
             </div>
-            <div className="stat-card">
+            <div className="course-details-stat-card">
               <div className="stat-icon">📎</div>
               <div className="stat-info">
                 <div className="stat-number">{course.attachments?.length || 0}</div>

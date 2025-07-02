@@ -171,7 +171,7 @@ const StudentCourseDetails = () => {
                   <li key={batch._id} className="info-item">
                     <span className="info-label">{batch.name}</span>
                     <button
-                      className="btn btn-outline"
+                      className="student-course-details-btn student-course-details-btn-outline"
                       onClick={() => navigate(`/student/batches/${batch._id}`)}
                     >
                       View Details →
@@ -207,7 +207,7 @@ const StudentCourseDetails = () => {
               <div className="material-title">📝 Assignments</div>
               <div className="material-type">View and submit assignments</div>
               <div className="material-actions">
-                <button className="btn btn-primary" disabled>
+                <button className="student-course-details-btn student-course-details-btn-primary" disabled>
                   Coming Soon
                 </button>
               </div>
@@ -216,7 +216,7 @@ const StudentCourseDetails = () => {
               <div className="material-title">📊 Grades</div>
               <div className="material-type">Check your grades and progress</div>
               <div className="material-actions">
-                <button className="btn btn-primary" disabled>
+                <button className="student-course-details-btn student-course-details-btn-primary" disabled>
                   Coming Soon
                 </button>
               </div>
@@ -225,7 +225,7 @@ const StudentCourseDetails = () => {
               <div className="material-title">📅 Schedule</div>
               <div className="material-type">View class schedule and calendar</div>
               <div className="material-actions">
-                <button className="btn btn-primary" disabled>
+                <button className="student-course-details-btn student-course-details-btn-primary" disabled>
                   Coming Soon
                 </button>
               </div>
@@ -234,7 +234,7 @@ const StudentCourseDetails = () => {
               <div className="material-title">💬 Discussions</div>
               <div className="material-type">Join course discussions</div>
               <div className="material-actions">
-                <button className="btn btn-primary" disabled>
+                <button className="student-course-details-btn student-course-details-btn-primary" disabled>
                   Coming Soon
                 </button>
               </div>

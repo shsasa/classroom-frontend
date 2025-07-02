@@ -146,9 +146,9 @@ const TeacherAssignmentDetails = () => {
   return (
     <div className="teacher-assignment-details-container">
       {/* Header */}
-      <div className="assignment-header">
+      <div className="teacher-assignment-details-header">
         <button
-          className="back-btn"
+          className="teacher-assignment-details-back-btn"
           onClick={() => navigate('/teacher/assignments')}
         >
           ← Back to Assignments
@@ -157,15 +157,15 @@ const TeacherAssignmentDetails = () => {
         <div className="teacher-assignment-details-header-content">
           <div className="title-section">
             <h1>{assignment.title}</h1>
-            <div className={`status-badge ${statusDisplay.class}`}>
+            <div className={`teacher-assignment-details-status-badge ${statusDisplay.class}`}>
               {statusDisplay.icon} {statusDisplay.text}
             </div>
           </div>
 
-          <div className="header-actions">
+          <div className="teacher-assignment-details-header-actions">
             <Link
               to={`/assignments/edit/${assignment._id}`}
-              className="btn btn-secondary"
+              className="teacher-assignment-details-btn teacher-assignment-details-btn-secondary"
             >
               <i className="fas fa-edit"></i> Edit Assignment
             </Link>
@@ -174,16 +174,16 @@ const TeacherAssignmentDetails = () => {
       </div>
 
       {/* Tabs */}
-      <div className="tabs-section">
-        <div className="tab-buttons">
+      <div className="teacher-assignment-details-tabs-section">
+        <div className="teacher-assignment-details-tab-buttons">
           <button
-            className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
+            className={`teacher-assignment-details-tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
             Overview
           </button>
           <button
-            className={`tab-btn ${activeTab === 'submissions' ? 'active' : ''}`}
+            className={`teacher-assignment-details-tab-btn ${activeTab === 'submissions' ? 'active' : ''}`}
             onClick={() => setActiveTab('submissions')}
           >
             Submissions ({submissionStats.total})
@@ -192,56 +192,56 @@ const TeacherAssignmentDetails = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="tab-content">
+      <div className="teacher-assignment-details-tab-content">
         {activeTab === 'overview' && (
-          <div className="overview-tab">
+          <div className="teacher-assignment-details-overview-tab">
             {/* Assignment Info */}
-            <div className="assignment-info-grid">
-              <div className="info-card">
-                <div className="info-icon">🎓</div>
-                <div className="info-content">
-                  <div className="info-label">Batch</div>
-                  <div className="info-value">{assignment.batch?.name}</div>
+            <div className="teacher-assignment-details-info-grid">
+              <div className="teacher-assignment-details-info-card">
+                <div className="teacher-assignment-details-info-icon">🎓</div>
+                <div className="teacher-assignment-details-info-content">
+                  <div className="teacher-assignment-details-info-label">Batch</div>
+                  <div className="teacher-assignment-details-info-value">{assignment.batch?.name}</div>
                 </div>
               </div>
 
-              <div className="info-card">
-                <div className="info-icon">📚</div>
-                <div className="info-content">
-                  <div className="info-label">Course</div>
-                  <div className="info-value">{assignment.course?.name}</div>
+              <div className="teacher-assignment-details-info-card">
+                <div className="teacher-assignment-details-info-icon">📚</div>
+                <div className="teacher-assignment-details-info-content">
+                  <div className="teacher-assignment-details-info-label">Course</div>
+                  <div className="teacher-assignment-details-info-value">{assignment.course?.name}</div>
                 </div>
               </div>
 
-              <div className="info-card">
-                <div className="info-icon">📅</div>
-                <div className="info-content">
-                  <div className="info-label">Due Date</div>
-                  <div className="info-value">{formatDate(assignment.dueDate)}</div>
+              <div className="teacher-assignment-details-info-card">
+                <div className="teacher-assignment-details-info-icon">📅</div>
+                <div className="teacher-assignment-details-info-content">
+                  <div className="teacher-assignment-details-info-label">Due Date</div>
+                  <div className="teacher-assignment-details-info-value">{formatDate(assignment.dueDate)}</div>
                 </div>
               </div>
 
-              <div className="info-card">
-                <div className="info-icon">📊</div>
-                <div className="info-content">
-                  <div className="info-label">Submissions</div>
-                  <div className="info-value">{submissionStats.total} received</div>
+              <div className="teacher-assignment-details-info-card">
+                <div className="teacher-assignment-details-info-icon">📊</div>
+                <div className="teacher-assignment-details-info-content">
+                  <div className="teacher-assignment-details-info-label">Submissions</div>
+                  <div className="teacher-assignment-details-info-value">{submissionStats.total} received</div>
                 </div>
               </div>
             </div>
 
             {/* Submission Statistics */}
-            <div className="stats-section">
+            <div className="teacher-assignment-details-stats-section">
               <h3>Submission Statistics</h3>
-              <div className="submission-stats-grid">
-                <div className="stat-card total">
+              <div className="teacher-assignment-details-submission-stats-grid">
+                <div className="teacher-assignment-details-stat-card total">
                   <div className="stat-icon">📋</div>
                   <div className="stat-content">
                     <div className="stat-number">{submissionStats.total}</div>
                     <div className="stat-label">Total Submissions</div>
                   </div>
                 </div>
-                <div className="stat-card graded">
+                <div className="teacher-assignment-details-stat-card graded">
                   <div className="stat-icon">✅</div>
                   <div className="stat-content">
                     <div className="stat-number">{submissionStats.graded}</div>
@@ -296,15 +296,15 @@ const TeacherAssignmentDetails = () => {
         )}
 
         {activeTab === 'submissions' && (
-          <div className="submissions-tab">
+          <div className="teacher-assignment-details-submissions-tab">
             {submissions.length === 0 ? (
-              <div className="no-submissions">
-                <div className="no-submissions-icon">📝</div>
+              <div className="teacher-assignment-details-no-submissions">
+                <div className="teacher-assignment-details-no-submissions-icon">📝</div>
                 <h3>No Submissions Yet</h3>
                 <p>Students haven't submitted their assignments yet.</p>
               </div>
             ) : (
-              <div className="submissions-list">
+              <div className="teacher-assignment-details-submissions-list">
                 {submissions.map(submission => (
                   <SubmissionCard
                     key={submission._id}
@@ -352,34 +352,34 @@ const SubmissionCard = ({ submission, onGrade }) => {
   }
 
   return (
-    <div className="submission-card">
-      <div className="submission-header">
-        <div className="student-info">
-          <div className="student-name">
+    <div className="teacher-assignment-details-submission-card">
+      <div className="teacher-assignment-details-submission-header">
+        <div className="teacher-assignment-details-student-info">
+          <div className="teacher-assignment-details-student-name">
             {submission.student?.firstName} {submission.student?.lastName}
           </div>
-          <div className="submission-date">
+          <div className="teacher-assignment-details-submission-date">
             Submitted: {formatDate(submission.submittedAt)}
           </div>
         </div>
-        <div className="submission-status">
+        <div className="teacher-assignment-details-submission-status">
           {submission.grade ? (
-            <span className="grade-badge graded">Grade: {submission.grade}</span>
+            <span className="teacher-assignment-details-grade-badge graded">Grade: {submission.grade}</span>
           ) : (
-            <span className="grade-badge pending">Pending Review</span>
+            <span className="teacher-assignment-details-grade-badge pending">Pending Review</span>
           )}
         </div>
       </div>
 
       {submission.submissionText && (
-        <div className="submission-content">
+        <div className="teacher-assignment-details-submission-content">
           <h4>Submission Text:</h4>
           <p>{submission.submissionText}</p>
         </div>
       )}
 
       {submission.files && submission.files.length > 0 && (
-        <div className="submission-files">
+        <div className="teacher-assignment-details-submission-files">
           <h4>Submitted Files:</h4>
           <div className="files-list">
             {submission.files.map((file, index) => (
@@ -426,7 +426,7 @@ const SubmissionCard = ({ submission, onGrade }) => {
             </div>
             <button
               type="submit"
-              className="btn btn-primary"
+              className="teacher-assignment-details-btn teacher-assignment-details-btn-primary"
               disabled={isGrading}
             >
               {isGrading ? 'Saving...' : 'Save Grade'}
