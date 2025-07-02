@@ -215,7 +215,7 @@
 }
 
 .assignment-card.pending {
-  border-left-color: #3b82f6;
+  border-left-color: #dc3545;
 }
 
 .assignment-card.urgent {
@@ -337,7 +337,7 @@
 }
 
 .due-countdown.pending {
-  color: #3b82f6;
+  color: #dc3545;
 }
 
 .due-countdown.urgent {

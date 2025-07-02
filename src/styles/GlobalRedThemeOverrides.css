@@ -1,0 +1,80 @@
+/* Global Red Theme Overrides for Student Pages */
+
+/* Override any remaining blue/purple colors */
+:root {
+  --primary-red: #dc3545;
+  --primary-red-dark: #c82333;
+  --primary-red-light: #ff6b6b;
+  --red-background: rgba(220, 53, 69, 0.1);
+  --red-border: rgba(220, 53, 69, 0.2);
+  --red-hover: rgba(220, 53, 69, 0.05);
+}
+
+/* Ensure all primary buttons use red theme */
+.btn-primary,
+.submit-btn,
+.primary-btn {
+  background: var(--primary-red) !important;
+  border-color: var(--primary-red) !important;
+  color: white !important;
+}
+
+.btn-primary:hover,
+.submit-btn:hover,
+.primary-btn:hover {
+  background: var(--primary-red-dark) !important;
+  border-color: var(--primary-red-dark) !important;
+}
+
+/* Override blue/purple gradients */
+.student-batch-details-container .batch-header,
+.student-batches-header,
+.batch-assignments-header {
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%) !important;
+}
+
+/* Override blue/purple accents */
+.status-badge.active,
+.batch-name,
+.course-name,
+.user-avatar,
+.course-icon {
+  background: var(--primary-red) !important;
+  color: white !important;
+}
+
+/* Override blue/purple text colors */
+.section-header h3,
+.schedule-day,
+.stat-icon,
+.stat-number {
+  color: var(--primary-red) !important;
+}
+
+/* Override blue/purple hover effects */
+.user-item:hover,
+.course-item:hover,
+.batch-card:hover {
+  background: var(--red-hover) !important;
+  border-color: var(--primary-red) !important;
+}
+
+/* Override loading and error states */
+.loading {
+  color: var(--primary-red) !important;
+}
+
+/* Override schedule time styling */
+.schedule-time {
+  color: var(--primary-red-dark) !important;
+  background: var(--red-background) !important;
+}
+
+/* Override any remaining blue elements */
+*[style*="667eea"],
+*[style*="764ba2"],
+*[style*="3b82f6"],
+*[style*="0066cc"] {
+  color: var(--primary-red) !important;
+  background: var(--red-background) !important;
+}

@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import api from '../services/api'
 import { toast } from 'react-toastify'
 import '../styles/StudentBatches.css'
+import '../styles/GlobalRedThemeOverrides.css'
 
 const StudentBatches = () => {
   const { user } = useContext(AuthContext)

@@ -87,18 +87,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       label: 'My Assignments',
       roles: ['teacher']
     },
-    {
-      path: '/reports',
-      icon: '📈',
-      label: 'Reports',
-      roles: ['admin', 'supervisor', 'teacher']
-    },
-    {
-      path: '/email-test',
-      icon: '📧',
-      label: 'Email Testing',
-      roles: ['admin', 'supervisor']
-    },
+
     {
       path: '/profile',
       icon: '⚙️',

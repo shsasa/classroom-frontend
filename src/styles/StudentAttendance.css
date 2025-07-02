@@ -202,8 +202,8 @@
 }
 
 .total-sessions {
-  background: #e7f3ff;
-  color: #0066cc;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: 600;
@@ -271,8 +271,8 @@
 }
 
 .batch-name {
-  background: #e7f3ff;
-  color: #0066cc;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 0.8rem;

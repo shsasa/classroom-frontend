@@ -83,7 +83,7 @@
 }
 
 .status-badge.pending {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
 }
 
@@ -230,7 +230,7 @@
 }
 
 .status-card.pending::before {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
 .status-card.overdue::before {

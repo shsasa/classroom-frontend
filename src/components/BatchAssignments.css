@@ -8,12 +8,12 @@
 }
 
 .batch-assignments-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   color: white;
   padding: 30px;
   border-radius: 12px;
   margin-bottom: 30px;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
 }
 
 .header-content {
@@ -135,7 +135,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   color: white;
   border-radius: 12px 12px 0 0;
 }
@@ -204,7 +204,7 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #dc3545;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -243,12 +243,12 @@
 }
 
 .submit-btn {
-  background: #667eea;
+  background: #dc3545;
   color: white;
 }
 
 .submit-btn:hover {
-  background: #5a6fd8;
+  background: #c82333;
   transform: translateY(-1px);
 }
 
@@ -315,7 +315,7 @@
 }
 
 .course-name {
-  background: #667eea;
+  background: #dc3545;
   color: white;
   padding: 4px 12px;
   border-radius: 20px;
@@ -371,12 +371,12 @@
 }
 
 .view-btn {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
 }
 
 .view-btn:hover {
-  background: #bbdefb;
+  background: rgba(220, 53, 69, 0.2);
 }
 
 .edit-btn {
@@ -397,7 +397,7 @@
 }
 
 .loading {
-  color: #667eea;
+  color: #dc3545;
 }
 
 .error {

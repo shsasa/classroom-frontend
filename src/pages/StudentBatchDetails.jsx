@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import api from '../services/api'
 import { toast } from 'react-toastify'
 import '../styles/StudentBatchDetails.css'
+import '../styles/GlobalRedThemeOverrides.css'
 
 const StudentBatchDetails = () => {
   const { id } = useParams()

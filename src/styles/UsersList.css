@@ -210,40 +210,113 @@
 }
 
 .users-table tbody tr:hover {
-  background-color: #fff5f5;
-  transition: background-color 0.2s ease;
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.04) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.user-info {
+.users-table tbody tr:hover .users-list-container .user-name {
+  filter: drop-shadow(0 3px 6px rgba(220, 53, 69, 0.5));
+  font-weight: 700;
+  animation-duration: 1s;
+  transform: translateX(4px);
+}
+
+.users-list-container .user-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
+  transition: all 0.3s ease;
 }
 
-.user-avatar {
-  width: 40px;
-  height: 40px;
+.users-list-container .user-avatar {
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
   overflow: hidden;
+  box-shadow:
+    0 4px 8px rgba(220, 53, 69, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-.user-avatar img {
+.users-list-container .user-avatar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.users-list-container .user-avatar:hover::before {
+  opacity: 1;
+}
+
+.users-list-container .user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 8px 16px rgba(220, 53, 69, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.users-list-container .user-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-.user-name {
+.users-list-container .user-avatar:hover img {
+  transform: scale(1.05);
+}
+
+.users-list-container .user-name {
   font-weight: 600;
-  color: #d32f2f;
+  color: #dc3545;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(220, 53, 69, 0.1);
+  cursor: default;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: shimmerText 3s ease-in-out infinite;
+}
+
+@keyframes shimmerText {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.users-list-container .user-name:hover {
+  transform: translateX(2px);
+  filter: drop-shadow(0 2px 4px rgba(220, 53, 69, 0.3));
+  animation-duration: 1.5s;
 }
 
 .status-badge,
@@ -495,14 +568,14 @@
     padding: 12px 10px;
   }
 
-  .user-info {
-    gap: 8px;
+  .users-list-container .user-info {
+    gap: 10px;
   }
 
-  .user-avatar {
-    width: 35px;
-    height: 35px;
-    font-size: 0.8rem;
+  .users-list-container .user-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
   }
 
   .actions-dropdown select {
