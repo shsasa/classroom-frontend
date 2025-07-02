@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './CourseCard.css'
 
 const CourseCard = ({
   course,
@@ -34,47 +35,39 @@ const CourseCard = ({
   }
 
   return (
-    <div className={`course-card ${!course.isActive ? 'inactive' : ''}`}>
-      <div className="course-header">
-        <h3 className="course-name">{course.name || 'Untitled Course'}</h3>
-        <div className="course-status">
-          <span className={`status-badge ${course.isActive ? 'active' : 'inactive'}`}>
+    <div className={`courses-list-card ${!course.isActive ? 'inactive' : ''}`}>
+      <div className="courses-list-header">
+        <h3 className="courses-list-name">{course.name || 'Untitled Course'}</h3>
+        <div className="courses-list-status">
+          <span className={`courses-list-status-badge ${course.isActive ? 'active' : 'inactive'}`}>
             {course.isActive ? 'Active' : 'Inactive'}
           </span>
         </div>
       </div>
 
-      <div className="course-body">
+      <div className="courses-list-body">
         {course.description && (
-          <p className="course-description">{course.description}</p>
+          <p className="courses-list-description">{course.description}</p>
         )}
 
-        <div className="course-info">
-          <div className="info-item">
-            <span className="info-label">Teachers:</span>
-            <span className="info-value">
-              {course.teachers?.length || 0}
-            </span>
+        <div className="courses-list-details">
+          <div className="courses-list-detail-item">
+            <div className="courses-list-detail-label">Teachers</div>
+            <div className="courses-list-detail-value">{course.teachers?.length || 0}</div>
           </div>
-
-          <div className="info-item">
-            <span className="info-label">Batches:</span>
-            <span className="info-value">
-              {course.batches?.length || 0}
-            </span>
+          <div className="courses-list-detail-item">
+            <div className="courses-list-detail-label">Batches</div>
+            <div className="courses-list-detail-value">{course.batches?.length || 0}</div>
           </div>
-
           {course.attachments?.length > 0 && (
-            <div className="info-item">
-              <span className="info-label">Attachments:</span>
-              <span className="info-value">
-                {course.attachments.length}
-              </span>
+            <div className="courses-list-detail-item">
+              <div className="courses-list-detail-label">Files</div>
+              <div className="courses-list-detail-value">{course.attachments.length}</div>
             </div>
           )}
         </div>
 
-        <div className="course-dates">
+        <div className="courses-list-meta">
           <small>Created: {formatDate(course.createdAt)}</small>
           {course.updatedAt !== course.createdAt && (
             <small>Updated: {formatDate(course.updatedAt)}</small>
@@ -82,9 +75,9 @@ const CourseCard = ({
         </div>
       </div>
 
-      <div className="course-actions">
+      <div className="courses-list-actions">
         <button
-          className="action-btn view-btn"
+          className="courses-list-action-btn courses-list-view-btn"
           onClick={() => onView(course._id)}
         >
           View Details
@@ -93,14 +86,14 @@ const CourseCard = ({
         {canManageCourses && (
           <>
             <button
-              className="action-btn edit-btn"
+              className="courses-list-action-btn courses-list-edit-btn"
               onClick={() => onEdit(course._id)}
             >
               Edit
             </button>
 
             <button
-              className="action-btn delete-btn"
+              className="courses-list-action-btn courses-list-delete-btn"
               onClick={() => onDelete(course._id, course.name)}
             >
               Delete

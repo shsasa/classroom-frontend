@@ -160,13 +160,9 @@ const AnnouncementsList = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="filters-section">
-          <div className="filters-header">
-            <h3>🔍 Filter Announcements</h3>
-          </div>
-          <div className="filters-grid">
-            <div className="filter-group">
-              <label>🔍 Search</label>
+        <div className="filters">
+          <div className="filter-row">
+            <div className="search-filter">
               <input
                 type="text"
                 name="search"
@@ -176,46 +172,41 @@ const AnnouncementsList = () => {
                 className="search-input"
               />
             </div>
-            <div className="filter-group">
-              <label>📚 Batch</label>
-              <select
-                name="batch"
-                value={filters.batch}
-                onChange={handleFilterChange}
-                className="filter-select"
-              >
-                <option value="">All Batches</option>
-                {batches.map(batch => (
-                  <option key={batch._id} value={batch._id}>
-                    {batch.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="filter-group">
-              <label>🎓 Course</label>
-              <select
-                name="course"
-                value={filters.course}
-                onChange={handleFilterChange}
-                className="filter-select"
-              >
-                <option value="">All Courses</option>
-                {courses.map(course => (
-                  <option key={course._id} value={course._id}>
-                    {course.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="filter-actions">
-              <button className="apply-btn" onClick={applyFilters}>
-                Apply Filters
-              </button>
-              <button className="clear-btn" onClick={clearFilters}>
-                Clear All
-              </button>
-            </div>
+
+            <select
+              name="batch"
+              value={filters.batch}
+              onChange={handleFilterChange}
+              className="filter-select"
+            >
+              <option value="">All Batches</option>
+              {batches.map(batch => (
+                <option key={batch._id} value={batch._id}>
+                  {batch.name}
+                </option>
+              ))}
+            </select>
+
+            <select
+              name="course"
+              value={filters.course}
+              onChange={handleFilterChange}
+              className="filter-select"
+            >
+              <option value="">All Courses</option>
+              {courses.map(course => (
+                <option key={course._id} value={course._id}>
+                  {course.name}
+                </option>
+              ))}
+            </select>
+
+            <button className="apply-btn" onClick={applyFilters}>
+              Apply
+            </button>
+            <button className="clear-btn" onClick={clearFilters}>
+              Clear
+            </button>
           </div>
         </div>
 

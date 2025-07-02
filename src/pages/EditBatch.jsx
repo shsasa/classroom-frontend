@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { toast } from 'react-toastify';
-import '../styles/AddBatch.css'; // نستخدم نفس تصميم AddBatch
+import '../styles/AddBatch.css'; // Use the same design as AddBatch
 
 const EditBatch = () => {
   const { id } = useParams();
