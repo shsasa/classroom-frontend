@@ -87,7 +87,6 @@ const AddBatch = () => {
     <div className="add-batch-container">
       <div className="add-batch-header">
         <div className="header-content">
-          <div className="header-icon">🎓</div>
           <div>
             <h1>Add New Batch</h1>
             <p>Create a new student batch with schedule and enrollment details</p>
@@ -176,23 +175,26 @@ const AddBatch = () => {
             <h3>Settings</h3>
 
             <div className="form-group">
-              <label className="checkbox-label">
+              <label htmlFor="isActiveBatch" className="batch-checkbox-label" id="isActiveBatchLabel">
                 <input
                   type="checkbox"
+                  id="isActiveBatch"
                   name="isActive"
                   checked={formData.isActive}
                   onChange={handleInputChange}
                   className="form-checkbox"
                 />
-                <span className="checkbox-custom"></span>
-                <span className="checkbox-text">
-                  <span className="label-icon">✅</span>
-                  Active Batch
-                </span>
+                <span className="batch-checkbox-custom" id="isActiveBatchCustom"></span>
+                <div className="batch-checkbox-text">
+                  <div>
+                    <span className="label-icon">✅</span>
+                    <strong>Active Batch</strong>
+                  </div>
+                  <p className="field-help">
+                    Active batches are visible to students and can accept enrollments
+                  </p>
+                </div>
               </label>
-              <p className="field-help">
-                Active batches are visible to students and can accept enrollments
-              </p>
             </div>
           </div>
 

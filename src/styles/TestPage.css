@@ -1,0 +1,106 @@
+.test-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.test-page h1 {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.user-info {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+
+.user-info h2 {
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.user-info p {
+  margin: 0.5rem 0;
+  color: #6c757d;
+}
+
+.available-routes {
+  margin-bottom: 2rem;
+}
+
+.available-routes h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.route-section {
+  margin-bottom: 1.5rem;
+}
+
+.route-section h3 {
+  color: #495057;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.route-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.route-section li {
+  margin: 0.5rem 0;
+}
+
+.route-section a {
+  color: #007bff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.route-section a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.password-reset-test {
+  background: #e9ecef;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.password-reset-test h2 {
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.password-reset-test p {
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.password-reset-test a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 1px solid #28a745;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.password-reset-test a:hover {
+  background-color: #28a745;
+  color: white;
+}

@@ -30,30 +30,15 @@ const Sidebar = ({ isOpen, onClose }) => {
       label: 'Users Management',
       roles: ['admin', 'supervisor']
     },
-    {
-      path: '/add-user',
-      icon: '👤',
-      label: 'Add User',
-      roles: ['admin', 'supervisor']
-    },
+
     {
       path: '/courses',
       icon: '📚',
       label: 'Courses',
       roles: ['admin', 'supervisor', 'teacher', 'student']
     },
-    {
-      path: '/add-course',
-      icon: '➕',
-      label: 'Add Course',
-      roles: ['admin', 'supervisor']
-    },
-    {
-      path: '/assignments',
-      icon: '📝',
-      label: 'Assignments',
-      roles: ['admin', 'supervisor', 'teacher', 'student']
-    },
+
+
     {
       path: '/attendance',
       icon: '📊',
@@ -71,6 +56,30 @@ const Sidebar = ({ isOpen, onClose }) => {
       icon: '🎓',
       label: 'Batches',
       roles: ['admin', 'supervisor', 'teacher']
+    },
+    {
+      path: '/student/batches',
+      icon: '🎓',
+      label: 'My Batches',
+      roles: ['student']
+    },
+    {
+      path: '/student/courses',
+      icon: '📚',
+      label: 'My Courses',
+      roles: ['student']
+    },
+    {
+      path: '/student/assignments',
+      icon: '📝',
+      label: 'My Assignments',
+      roles: ['student']
+    },
+    {
+      path: '/teacher/assignments',
+      icon: '📋',
+      label: 'My Assignments',
+      roles: ['teacher']
     },
     {
       path: '/reports',

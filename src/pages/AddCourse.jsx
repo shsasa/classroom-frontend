@@ -198,7 +198,7 @@ const AddCourse = () => {
             <div className="teachers-selection">
               {teachers.length > 0 ? (
                 teachers.map(teacher => (
-                  <div key={teacher._id || teacher.id} className="teacher-checkbox">
+                  <div key={teacher._id || teacher.id} className="course-teacher-item">
                     <input
                       type="checkbox"
                       id={`teacher-${teacher._id || teacher.id}`}
@@ -251,7 +251,7 @@ const AddCourse = () => {
           </div>
 
           <div className="form-group">
-            <div className="checkbox-group">
+            <div className="course-checkbox-group">
               <input
                 type="checkbox"
                 id="isActive"

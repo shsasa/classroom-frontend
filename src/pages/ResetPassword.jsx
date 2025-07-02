@@ -33,7 +33,7 @@ const ResetPassword = () => {
       }
 
       try {
-        const response = await api.get(`/users/reset-password/verify?token=${token}`);
+        const response = await api.get(`/auth/verify-reset-token?token=${token}`);
 
         if (response.data.status === 'Success') {
           setTokenValid(true);
@@ -57,7 +57,7 @@ const ResetPassword = () => {
 
   // If user is already logged in, redirect to dashboard
   if (authToken) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/" replace />;
   }
 
   const handleInputChange = (e) => {
@@ -98,9 +98,9 @@ const ResetPassword = () => {
     setMessage('');
 
     try {
-      const response = await api.post('/users/reset-password', {
-        token,
-        newPassword: formData.newPassword
+      const response = await api.post('/auth/reset-password', {
+        resetToken: token,
+        password: formData.newPassword
       });
 
       if (response.data.status === 'Success') {
@@ -108,7 +108,7 @@ const ResetPassword = () => {
         setResetSuccess(true);
         // Redirect to login after 3 seconds
         setTimeout(() => {
-          navigate('/login');
+          navigate('/signin');
         }, 3000);
       } else {
         setError(response.data.msg || 'Failed to reset password');
@@ -151,7 +151,7 @@ const ResetPassword = () => {
             You will be redirected to the login page in a few seconds...
           </p>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/signin')}
             className="login-btn"
           >
             Go to Login Now
@@ -180,7 +180,7 @@ const ResetPassword = () => {
             Request New Reset Link
           </button>
           <div className="back-to-login">
-            <a href="/login">Back to Login</a>
+            <a href="/signin">Back to Login</a>
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@ const ResetPassword = () => {
         </form>
 
         <div className="back-to-login">
-          <a href="/login">Back to Login</a>
+          <a href="/signin">Back to Login</a>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     setMessage('');
 
     try {
-      const response = await api.post('/users/forgot-password', { email });
+      const response = await api.post('/auth/request-password-reset', { email });
 
       if (response.data.status === 'Success') {
         setMessage(response.data.msg);

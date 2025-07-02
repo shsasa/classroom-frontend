@@ -113,7 +113,7 @@
   background: #fafafa;
 }
 
-.teacher-checkbox {
+.course-teacher-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -121,16 +121,16 @@
   border-bottom: 1px solid #eee;
 }
 
-.teacher-checkbox:last-child {
+.course-teacher-item:last-child {
   border-bottom: none;
 }
 
-.teacher-checkbox input[type="checkbox"] {
+.course-teacher-item input[type="checkbox"] {
   margin: 0;
   width: auto;
 }
 
-.teacher-checkbox label {
+.course-teacher-item label {
   margin: 0;
   cursor: pointer;
   font-size: 14px;
@@ -227,19 +227,19 @@
   cursor: not-allowed;
 }
 
-/* Checkbox Group */
-.checkbox-group {
+/* Course Checkbox Group */
+.course-checkbox-group {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.checkbox-group input[type="checkbox"] {
+.course-checkbox-group input[type="checkbox"] {
   margin: 0;
   width: auto;
 }
 
-.checkbox-group label {
+.course-checkbox-group label {
   margin: 0;
   cursor: pointer;
   font-size: 16px;
@@ -351,7 +351,7 @@
     font-size: 22px;
   }
 
-  .teacher-checkbox label {
+  .course-teacher-item label {
     font-size: 13px;
   }
 

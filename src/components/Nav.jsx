@@ -57,7 +57,7 @@ const Nav = ({ onToggleSidebar, onCloseSidebar }) => {
       <div className="navbar-right">
         {user ? (
           <>
-            <div className="user-info">
+            <div className="user-info-nav">
               <div className="user-avatar">
                 {user.profilePicture ? (
                   <img src={user.profilePicture} alt={user.name} />

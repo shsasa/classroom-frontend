@@ -167,7 +167,6 @@ const AnnouncementsList = () => {
       <div className="announcements-container">
         <div className="announcements-header">
           <div className="header-content">
-            <div className="header-icon">📢</div>
             <h1>Announcements</h1>
             <p>Stay updated with the latest news and important updates</p>
           </div>

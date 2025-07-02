@@ -41,15 +41,6 @@
   gap: 15px;
 }
 
-.header-icon {
-  font-size: 3rem;
-  background: var(--sidebar-bg-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(220, 52, 18, 0.3));
-}
-
 .header-content h1 {
   color: var(--text-red);
   font-size: 3.2rem;

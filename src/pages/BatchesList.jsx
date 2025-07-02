@@ -100,7 +100,6 @@ const BatchesList = () => {
     <div className="batches-container">
       <div className="batches-header">
         <div className="header-content">
-          <div className="header-icon">🎓</div>
           <h1>Batches Management</h1>
           <p>Manage student batches, schedules, and enrollments</p>
         </div>

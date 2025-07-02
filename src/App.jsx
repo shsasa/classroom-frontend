@@ -26,6 +26,17 @@ import BatchesList from './pages/BatchesList'
 import AddBatch from './pages/AddBatch'
 import BatchDetails from './pages/BatchDetails'
 import EditBatch from './pages/EditBatch'
+import BatchAssignments from './components/BatchAssignments'
+import Profile from './pages/Profile'
+import StudentBatches from './pages/StudentBatches'
+import StudentBatchDetails from './pages/StudentBatchDetails'
+import StudentCourses from './pages/StudentCourses'
+import StudentCourseDetails from './pages/StudentCourseDetails'
+import StudentAssignments from './pages/StudentAssignments'
+import StudentAssignmentDetails from './pages/StudentAssignmentDetails'
+import TeacherAssignments from './pages/TeacherAssignments'
+import TeacherAssignmentDetails from './pages/TeacherAssignmentDetails'
+import TestPage from './pages/TestPage'
 
 const App = () => {
   const { user, login, logout } = useContext(AuthContext)
@@ -98,12 +109,22 @@ const App = () => {
           <Route path="/batches" element={<BatchesList />} />
           <Route path="/batches/add" element={<AddBatch />} />
           <Route path="/batches/:id" element={<BatchDetails />} />
+          <Route path="/batches/:id/assignments" element={<BatchAssignments />} />
           <Route path="/batches/edit/:id" element={<EditBatch />} />
           <Route path="/email-test" element={<EmailTest />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/student/batches" element={<StudentBatches />} />
+          <Route path="/student/batches/:id" element={<StudentBatchDetails />} />
+          <Route path="/student/courses" element={<StudentCourses />} />
+          <Route path="/student/courses/:id" element={<StudentCourseDetails />} />
+          <Route path="/student/assignments" element={<StudentAssignments />} />
+          <Route path="/student/assignments/:id" element={<StudentAssignmentDetails />} />
+          <Route path="/teacher/assignments" element={<TeacherAssignments />} />
+          <Route path="/teacher/assignments/:id" element={<TeacherAssignmentDetails />} />
+          <Route path="/test" element={<TestPage />} />
 
-          {/* <Route path="/profile" element={<Profile />} /> */}
         </Routes>
       </div>
     </div>

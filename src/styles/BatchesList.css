@@ -30,15 +30,6 @@
   gap: 1rem;
 }
 
-.header-icon {
-  font-size: 2.5rem;
-  background: linear-gradient(135deg, #DC3412, #B1422C);
-  color: white;
-  padding: 0.75rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(220, 52, 18, 0.3);
-}
-
 .batches-header h1 {
   margin: 0;
   font-size: 2rem;
@@ -511,11 +502,6 @@
     text-align: left;
   }
 
-  .header-icon {
-    font-size: 2.5rem;
-    padding: 0.75rem;
-  }
-
   .batches-header h1 {
     font-size: 2rem;
   }
@@ -588,11 +574,6 @@
 
   .batches-header {
     padding: 1rem;
-  }
-
-  .header-icon {
-    font-size: 2rem;
-    padding: 0.5rem;
   }
 
   .batches-header h1 {
