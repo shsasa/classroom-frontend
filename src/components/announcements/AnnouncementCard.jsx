@@ -1,12 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getFileUrl } from '../services/api'
-import '../styles/AnnouncementCard.css'
+import { getFileUrl } from '../../services/api'
+import './AnnouncementCard.css'
 
-const AnnouncementCard = ({ 
-  announcement, 
-  canCreateAnnouncement, 
-  onDelete 
+const AnnouncementCard = ({
+  announcement,
+  canCreateAnnouncement,
+  onDelete
 }) => {
   const navigate = useNavigate()
 
@@ -38,26 +38,26 @@ const AnnouncementCard = ({
   }
 
   return (
-    <div className={`announcement-card ${announcement.isPinned ? 'pinned' : ''}`}>
+    <div className={`announcement-card-container ${announcement.isPinned ? 'pinned' : ''}`}>
       {announcement.isPinned && (
-        <div className="pin-indicator">📌 Pinned</div>
+        <div className="announcement-card-pin-indicator">📌 Pinned</div>
       )}
 
-      <div className="announcement-header">
-        <h3 className="announcement-title">
+      <div className="announcement-card-header">
+        <h3 className="announcement-card-title">
           {announcement.title || 'Untitled'}
         </h3>
-        <div className="announcement-meta">
-          <div className="meta-item">
-            <span className="meta-icon">📅</span>
-            <span className="announcement-date">
+        <div className="announcement-card-meta">
+          <div className="announcement-card-meta-item">
+            <span className="announcement-card-meta-icon">📅</span>
+            <span className="announcement-card-date">
               {formatDate(announcement.createdAt)}
             </span>
           </div>
           {announcement.author && (
-            <div className="meta-item">
-              <span className="meta-icon">👤</span>
-              <span className="author-name">
+            <div className="announcement-card-meta-item">
+              <span className="announcement-card-meta-icon">👤</span>
+              <span className="announcement-card-author-name">
                 {announcement.author.name || 'Unknown Author'}
               </span>
             </div>
@@ -65,14 +65,14 @@ const AnnouncementCard = ({
         </div>
       </div>
 
-      <div className="announcement-content">
+      <div className="announcement-card-content">
         <p>{announcement.content || 'No content available'}</p>
       </div>
 
       {announcement.attachments && announcement.attachments.length > 0 && (
-        <div className="announcement-attachments">
+        <div className="announcement-card-attachments">
           <h4>📎 Attachments:</h4>
-          <div className="attachments-list">
+          <div className="announcement-card-attachments-list">
             {announcement.attachments.map((attachment, index) => {
               // Handle both file objects (new format) and URL strings (old format)
               const isFileObject = typeof attachment === 'object' && attachment.filename
@@ -84,13 +84,13 @@ const AnnouncementCard = ({
                 : attachment
 
               return (
-                <div key={index} className="attachment-item">
-                  <span className="attachment-icon">📄</span>
+                <div key={index} className="announcement-card-attachment-item">
+                  <span className="announcement-card-attachment-icon">📄</span>
                   <a href={fileUrl} target="_blank" rel="noopener noreferrer">
                     {fileName}
                   </a>
                   {isFileObject && attachment.size && (
-                    <span className="attachment-size">
+                    <span className="announcement-card-attachment-size">
                       ({(attachment.size / 1024).toFixed(1)} KB)
                     </span>
                   )}
@@ -101,33 +101,33 @@ const AnnouncementCard = ({
         </div>
       )}
 
-      <div className="announcement-footer">
-        <div className="announcement-stats">
-          <span className="status-badge active">Active</span>
+      <div className="announcement-card-footer">
+        <div className="announcement-card-stats">
+          <span className="announcement-card-status-badge active">Active</span>
         </div>
 
-        <div className="announcement-actions">
+        <div className="announcement-card-actions">
           <button
-            className="action-btn view-btn"
+            className="announcement-card-view-btn"
             onClick={() => navigate(`/announcements/${announcement._id}`)}
           >
-            <span className="btn-icon">👁️</span>
+            <span className="announcement-card-btn-icon">👁️</span>
             View
           </button>
           {canCreateAnnouncement && (
             <>
               <button
-                className="action-btn edit-btn"
+                className="announcement-card-edit-btn"
                 onClick={() => navigate(`/announcements/edit/${announcement._id}`)}
               >
-                <span className="btn-icon">✏️</span>
+                <span className="announcement-card-btn-icon">✏️</span>
                 Edit
               </button>
               <button
-                className="action-btn delete-btn"
+                className="announcement-card-delete-btn"
                 onClick={() => onDelete(announcement._id)}
               >
-                <span className="btn-icon">🗑️</span>
+                <span className="announcement-card-btn-icon">🗑️</span>
                 Delete
               </button>
             </>

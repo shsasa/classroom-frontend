@@ -98,3 +98,19 @@ export const deleteCourse = async (id) => {
     throw error
   }
 }
+
+// Get courses for current teacher
+export const getTeacherCourses = async () => {
+  try {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      throw new Error('No token found')
+    }
+
+    const response = await api.get('/courses/teacher/my-courses')
+    return response.data
+  } catch (error) {
+    console.error('Error fetching teacher courses:', error)
+    throw error
+  }
+}

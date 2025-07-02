@@ -138,14 +138,14 @@
 }
 
 /* Quick Actions */
-.quick-actions {
+.attendance-quick-actions {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
 
-.btn {
+.attendance-btn {
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
@@ -158,41 +158,41 @@
   gap: 8px;
 }
 
-.btn:hover {
+.attendance-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.btn:disabled {
+.attendance-btn:disabled {
   cursor: not-allowed;
   opacity: 0.6;
   transform: none;
 }
 
-.btn-primary {
+.attendance-btn-primary {
   background: #dc3545;
   color: white;
 }
 
-.btn-primary:hover:not(:disabled) {
+.attendance-btn-primary:hover:not(:disabled) {
   background: #c82333;
 }
 
-.btn-success {
+.attendance-btn-success {
   background: #28a745;
   color: white;
 }
 
-.btn-success:hover:not(:disabled) {
+.attendance-btn-success:hover:not(:disabled) {
   background: #1e7e34;
 }
 
-.btn-warning {
+.attendance-btn-warning {
   background: #ffc107;
   color: #212529;
 }
 
-.btn-warning:hover:not(:disabled) {
+.attendance-btn-warning:hover:not(:disabled) {
   background: #e0a800;
 }
 
@@ -410,11 +410,11 @@
     grid-template-columns: 1fr;
   }
 
-  .quick-actions {
+  .attendance-quick-actions {
     flex-direction: column;
   }
 
-  .btn {
+  .attendance-btn {
     justify-content: center;
   }
 

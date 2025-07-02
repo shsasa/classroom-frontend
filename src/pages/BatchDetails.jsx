@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { toast } from 'react-toastify';
-import AddStudentsToBatch from '../components/AddStudentsToBatch';
-import AddTeachersToBatch from '../components/AddTeachersToBatch';
-import AddCoursesToBatch from '../components/AddCoursesToBatch';
-import EditBatchSchedule from '../components/EditBatchSchedule';
+import { AuthContext } from '../context/AuthContext';
+import AddStudentsToBatch from '../components/forms/AddStudentsToBatch';
+import AddTeachersToBatch from '../components/forms/AddTeachersToBatch';
+import AddCoursesToBatch from '../components/forms/AddCoursesToBatch';
+import EditBatchSchedule from '../components/forms/EditBatchSchedule';
 import '../styles/BatchDetails.css';
 
 const BatchDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [batch, setBatch] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,9 +21,8 @@ const BatchDetails = () => {
   const [showAddCoursesModal, setShowAddCoursesModal] = useState(false);
   const [showEditScheduleModal, setShowEditScheduleModal] = useState(false);
 
-  // Get user role from localStorage
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const userRole = user.role;
+  // Get user role from AuthContext
+  const userRole = user?.role;
   const canManageBatches = ['admin', 'supervisor'].includes(userRole);
 
   useEffect(() => {

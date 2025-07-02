@@ -25,23 +25,43 @@ const AttendanceManagement = () => {
       navigate('/')
       return
     }
-    fetchBatches()
-  }, [user, navigate, canManageAttendance])
 
-  const fetchBatches = async () => {
-    try {
-      const response = await api.get('/batches')
-      setBatches(response.data)
-    } catch (error) {
-      console.error('Error fetching batches:', error)
-      toast.error('Failed to fetch batches')
+    const loadBatches = async () => {
+      try {
+        let endpoint = '/batches'
+
+        // Choose endpoint based on user role
+        if (user.role === 'teacher') {
+          endpoint = '/batches/teacher/my-batches'
+        } else if (user.role === 'student') {
+          endpoint = '/batches/student/my-batches'
+        }
+
+        const response = await api.get(endpoint)
+        setBatches(response.data)
+      } catch (error) {
+        console.error('Error fetching batches:', error)
+        toast.error('Failed to fetch batches')
+      }
     }
-  }
+
+    loadBatches()
+  }, [user, navigate, canManageAttendance])
 
   const fetchBatchStudents = async (batchId) => {
     try {
       setLoading(true)
-      const response = await api.get(`/batches/${batchId}`)
+
+      let endpoint = `/batches/${batchId}`
+
+      // Choose endpoint based on user role
+      if (user.role === 'teacher') {
+        endpoint = `/batches/teacher/${batchId}`
+      } else if (user.role === 'student') {
+        endpoint = `/batches/student/${batchId}`
+      }
+
+      const response = await api.get(endpoint)
       const batch = response.data
       setStudents(batch.students || [])
 
@@ -188,7 +208,7 @@ const AttendanceManagement = () => {
       {/* Header */}
       <div className="attendance-management-header">
         <div className="attendance-management-header-content">
-          <h1>📊 Attendance Management</h1>
+          <h1> Attendance Management</h1>
           <p>Record and manage student attendance for batches</p>
         </div>
       </div>
@@ -244,15 +264,15 @@ const AttendanceManagement = () => {
 
       {/* Quick Actions */}
       {attendanceRecords.length > 0 && (
-        <div className="quick-actions">
-          <button className="btn btn-success" onClick={markAllPresent}>
+        <div className="attendance-quick-actions">
+          <button className="attendance-btn attendance-btn-success" onClick={markAllPresent}>
             ✅ Mark All Present
           </button>
-          <button className="btn btn-warning" onClick={markAllAbsent}>
+          <button className="attendance-btn attendance-btn-warning" onClick={markAllAbsent}>
             ❌ Mark All Absent
           </button>
           <button
-            className="btn btn-primary"
+            className="attendance-btn attendance-btn-primary"
             onClick={saveAttendance}
             disabled={saving}
           >

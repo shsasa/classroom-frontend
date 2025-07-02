@@ -1,12 +1,14 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import api from '../services/api'
+import { AuthContext } from '../context/AuthContext'
 import './BatchAssignments.css'
 
 const BatchAssignments = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useContext(AuthContext)
   const [batch, setBatch] = useState(null)
   const [assignments, setAssignments] = useState([])
   const [selectedCourse, setSelectedCourse] = useState('')
@@ -21,9 +23,8 @@ const BatchAssignments = () => {
     dueDate: ''
   })
 
-  // Get user role from localStorage
-  const user = JSON.parse(localStorage.getItem('user') || '{}')
-  const userRole = user.role
+  // Get user role from AuthContext
+  const userRole = user?.role
   const canCreateAssignments = ['admin', 'supervisor', 'teacher'].includes(userRole)
 
   const fetchBatchDetails = useCallback(async () => {

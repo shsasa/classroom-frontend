@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import '../styles/Nav.css'
+import '../../styles/Nav.css'
 
 const Nav = ({ onToggleSidebar, onCloseSidebar }) => {
   const { user, logout } = useContext(AuthContext)

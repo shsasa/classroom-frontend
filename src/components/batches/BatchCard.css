@@ -1,0 +1,225 @@
+/* BatchCard Component Styles */
+.batch-card-container {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E9ECEF;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.batch-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.batch-card-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #DC3412;
+  transition: height 0.3s ease;
+}
+
+.batch-card-container.upcoming::before {
+  background: #F39C12;
+}
+
+.batch-card-container.active::before {
+  background: #27AE60;
+}
+
+.batch-card-container.completed::before {
+  background: #6C757D;
+}
+
+/* Header Section */
+.batch-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+}
+
+.batch-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2C3E50;
+  flex: 1;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.batch-card-status-badge {
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 75px;
+}
+
+.batch-card-status-badge.upcoming {
+  background: #FFF3CD;
+  color: #856404;
+  border: 1px solid #F39C12;
+}
+
+.batch-card-status-badge.active {
+  background: #D4F5D4;
+  color: #1B5E20;
+  border: 1px solid #27AE60;
+}
+
+.batch-card-status-badge.completed {
+  background: #F8F9FA;
+  color: #6C757D;
+  border: 1px solid #DEE2E6;
+}
+
+/* Info Section */
+.batch-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+.batch-card-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #F8F9FA;
+}
+
+.batch-card-info-item:last-child {
+  border-bottom: none;
+}
+
+.batch-card-info-label {
+  font-weight: 600;
+  color: #6C757D;
+  font-size: 0.875rem;
+}
+
+.batch-card-info-value {
+  font-weight: 500;
+  color: #2C3E50;
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+/* Description Section */
+.batch-card-description {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background: #F8F9FA;
+  border-radius: 8px;
+  border-left: 4px solid #DC3412;
+  color: #6C757D;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Actions Section */
+.batch-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.batch-card-actions button {
+  flex: 1;
+  min-width: 80px;
+  padding: 0.625rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.batch-card-view-btn {
+  background: #17A2B8;
+  color: white;
+}
+
+.batch-card-view-btn:hover {
+  background: #138496;
+  transform: translateY(-1px);
+}
+
+.batch-card-edit-btn {
+  background: #FFC107;
+  color: #212529;
+}
+
+.batch-card-edit-btn:hover {
+  background: #E0A800;
+  transform: translateY(-1px);
+}
+
+.batch-card-delete-btn {
+  background: #DC3545;
+  color: white;
+}
+
+.batch-card-delete-btn:hover {
+  background: #C82333;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .batch-card-container {
+    padding: 1.25rem;
+  }
+
+  .batch-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .batch-card-title {
+    font-size: 1.1rem;
+  }
+
+  .batch-card-actions {
+    flex-direction: column;
+  }
+
+  .batch-card-actions button {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .batch-card-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .batch-card-info-value {
+    text-align: left;
+  }
+}

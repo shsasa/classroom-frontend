@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const EmptyState = ({
+const EmptyState = ({ 
   icon = '📂',
   title,
   message,
@@ -15,7 +15,7 @@ const EmptyState = ({
       <h3>{title}</h3>
       <p>{message}</p>
       {showAction && onAction && actionText && (
-        <button
+        <button 
           className="empty-action-btn"
           onClick={onAction}
         >

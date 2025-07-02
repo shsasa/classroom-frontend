@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router'
 import { AuthContext } from './context/AuthContext'
 import { CheckSession } from './services/Auth'
-import Nav from './components/Nav'
-import Sidebar from './components/Sidebar'
+import Nav from './components/layout/Nav'
+import Sidebar from './components/layout/Sidebar'
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import AddUser from './pages/AddUser'
@@ -33,7 +33,7 @@ import StudentBatchDetails from './pages/StudentBatchDetails'
 import StudentCourses from './pages/StudentCourses'
 import StudentCourseDetails from './pages/StudentCourseDetails'
 import StudentAssignments from './pages/StudentAssignments'
-import StudentAssignmentDetails from './pages/StudentAssignmentDetails'
+import StudentAssignmentDetail from './pages/StudentAssignmentDetail'
 import TeacherAssignments from './pages/TeacherAssignments'
 import TeacherAssignmentDetails from './pages/TeacherAssignmentDetails'
 import AttendanceManagement from './pages/AttendanceManagement'
@@ -122,7 +122,7 @@ const App = () => {
           <Route path="/student/courses" element={<StudentCourses />} />
           <Route path="/student/courses/:id" element={<StudentCourseDetails />} />
           <Route path="/student/assignments" element={<StudentAssignments />} />
-          <Route path="/student/assignments/:id" element={<StudentAssignmentDetails />} />
+          <Route path="/student/assignments/:id" element={<StudentAssignmentDetail />} />
           <Route path="/student/attendance" element={<StudentAttendance />} />
           <Route path="/teacher/assignments" element={<TeacherAssignments />} />
           <Route path="/teacher/assignments/:id" element={<TeacherAssignmentDetails />} />

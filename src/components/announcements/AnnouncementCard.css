@@ -1,0 +1,314 @@
+/* AnnouncementCard Component Styles */
+.announcement-card-container {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E9ECEF;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.announcement-card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.announcement-card-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #DC3412;
+  transition: height 0.3s ease;
+}
+
+.announcement-card-container.pinned {
+  border-color: #FFC107;
+  background: #FFFBF0;
+}
+
+.announcement-card-container.pinned::before {
+  background: #FFC107;
+  height: 6px;
+}
+
+/* Pin Indicator */
+.announcement-card-pin-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #FFC107;
+  color: #212529;
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Header Section */
+.announcement-card-header {
+  margin-bottom: 1.25rem;
+  padding-right: 3rem;
+  /* Space for pin indicator */
+}
+
+.announcement-card-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+.announcement-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: #6C757D;
+  font-size: 0.875rem;
+}
+
+.announcement-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.announcement-card-meta-icon {
+  font-size: 0.875rem;
+}
+
+.announcement-card-date,
+.announcement-card-author-name {
+  font-weight: 500;
+}
+
+/* Content Section */
+.announcement-card-content {
+  margin-bottom: 1.25rem;
+}
+
+.announcement-card-content p {
+  color: #495057;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Attachments Section */
+.announcement-card-attachments {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background: #F8F9FA;
+  border-radius: 12px;
+  border-left: 4px solid #17A2B8;
+}
+
+.announcement-card-attachments h4 {
+  margin: 0 0 0.75rem 0;
+  color: #495057;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.announcement-card-attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.announcement-card-attachment-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #DEE2E6;
+}
+
+.announcement-card-attachment-icon {
+  font-size: 1rem;
+  color: #17A2B8;
+}
+
+.announcement-card-attachment-item a {
+  color: #17A2B8;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.announcement-card-attachment-item a:hover {
+  text-decoration: underline;
+  color: #138496;
+}
+
+.announcement-card-attachment-size {
+  color: #6C757D;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+/* Footer Section */
+.announcement-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #F8F9FA;
+}
+
+.announcement-card-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.announcement-card-status-badge {
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.announcement-card-status-badge.active {
+  background: #D4F5D4;
+  color: #1B5E20;
+  border: 1px solid #27AE60;
+}
+
+/* Actions Section */
+.announcement-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.announcement-card-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  min-width: 70px;
+}
+
+.announcement-card-btn-icon {
+  font-size: 0.875rem;
+}
+
+.announcement-card-view-btn {
+  background: #E1F5FE;
+  color: #0277BD;
+  border: 1px solid #81D4FA;
+}
+
+.announcement-card-view-btn:hover {
+  background: #0277BD;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.announcement-card-edit-btn {
+  background: #FFF3CD;
+  color: #856404;
+  border: 1px solid #F39C12;
+}
+
+.announcement-card-edit-btn:hover {
+  background: #F39C12;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.announcement-card-delete-btn {
+  background: #F8D7DA;
+  color: #721C24;
+  border: 1px solid #DC3545;
+}
+
+.announcement-card-delete-btn:hover {
+  background: #DC3545;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .announcement-card-container {
+    padding: 1.25rem;
+  }
+
+  .announcement-card-header {
+    padding-right: 0;
+  }
+
+  .announcement-card-pin-indicator {
+    position: static;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+  }
+
+  .announcement-card-title {
+    font-size: 1.25rem;
+  }
+
+  .announcement-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .announcement-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .announcement-card-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .announcement-card-actions button {
+    flex: 1;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .announcement-card-container {
+    padding: 1rem;
+  }
+
+  .announcement-card-title {
+    font-size: 1.125rem;
+  }
+
+  .announcement-card-actions {
+    flex-direction: column;
+  }
+
+  .announcement-card-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}

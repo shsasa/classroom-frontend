@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api, { getFileUrl } from '../services/api';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../context/AuthContext';
 import '../styles/AnnouncementDetails.css';
 
 const AnnouncementDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [announcement, setAnnouncement] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Get user role from localStorage
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const userRole = user.role;
+  // Get user role from AuthContext
+  const userRole = user?.role;
   const canEdit = ['admin', 'supervisor'].includes(userRole);
 
   useEffect(() => {

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../context/AuthContext';
 import '../styles/AddAnnouncement.css';
 import '../styles/AnnouncementCheckbox.css';
 import '../styles/SharedComponents.css';
 
 const AddAnnouncement = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [batches, setBatches] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -22,9 +24,8 @@ const AddAnnouncement = () => {
   });
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  // Get user info
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const userRole = user.role;
+  // Get user role from AuthContext
+  const userRole = user?.role;
 
   useEffect(() => {
     fetchBatchesAndCourses();
