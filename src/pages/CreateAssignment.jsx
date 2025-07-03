@@ -44,7 +44,7 @@ const CreateAssignmentPage = () => {
         )
       })
       setBatches(activeBatches)
-      console.log('Active batches loaded:', activeBatches.length)
+      // Active batches loaded
     } catch (error) {
       console.error('Error fetching teacher batches:', error)
       setBatches([])

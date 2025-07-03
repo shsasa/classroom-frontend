@@ -57,7 +57,7 @@ const App = () => {
         // Only check session if both token and user exist AND user is not already set
         if (token && savedUser && !user) {
           const session = await CheckSession()
-          console.log('CHECK SESSION USER:', session)
+          // Check session user
           login(session.user)
         }
       } catch (error) {

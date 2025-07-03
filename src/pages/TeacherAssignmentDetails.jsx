@@ -42,16 +42,34 @@ const TeacherAssignmentDetails = () => {
 
   const fetchSubmissions = async () => {
     try {
+      console.log('Fetching submissions for assignment:', id)
       const response = await api.get(`/submissions/assignment/${id}`)
-      setSubmissions(response.data)
+      console.log('Fetched submissions:', response.data)
+
+      // Make sure we have all needed fields
+      const processedSubmissions = response.data.map(sub => {
+        return {
+          ...sub,
+          submissionText: sub.submissionText || sub.content || '',
+          files: sub.files || (sub.attachments ? sub.attachments.map(att => ({
+            filename: att,
+            originalName: typeof att === 'string' ? att.split('/').pop() : 'File',
+            url: `/uploads/${att}`
+          })) : [])
+        }
+      })
+
+      console.log('Processed submissions:', processedSubmissions)
+      setSubmissions(processedSubmissions)
     } catch (error) {
       console.error('Error fetching submissions:', error)
-      // Don't show error for submissions as it's not critical
+      toast.error('Failed to fetch student submissions')
     }
   }
 
   const handleGradeSubmission = async (submissionId, grade, feedback) => {
     try {
+      console.log('Grading submission:', { submissionId, grade, feedback })
       await api.put(`/submissions/${submissionId}/grade`, {
         grade,
         feedback
@@ -371,18 +389,18 @@ const SubmissionCard = ({ submission, onGrade }) => {
         </div>
       </div>
 
-      {submission.submissionText && (
+      {(submission.submissionText || submission.content) && (
         <div className="teacher-assignment-details-submission-content">
           <h4>Submission Text:</h4>
-          <p>{submission.submissionText}</p>
+          <p>{submission.submissionText || submission.content}</p>
         </div>
       )}
 
-      {submission.files && submission.files.length > 0 && (
+      {((submission.files && submission.files.length > 0) || (submission.attachments && submission.attachments.length > 0)) && (
         <div className="teacher-assignment-details-submission-files">
           <h4>Submitted Files:</h4>
           <div className="files-list">
-            {submission.files.map((file, index) => (
+            {submission.files && submission.files.map((file, index) => (
               <div key={index} className="file-item">
                 <div className="file-icon">📎</div>
                 <div className="file-info">
@@ -390,6 +408,23 @@ const SubmissionCard = ({ submission, onGrade }) => {
                 </div>
                 <a
                   href={file.url || `/uploads/${file.filename}`}
+                  download
+                  className="download-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download
+                </a>
+              </div>
+            ))}
+            {submission.attachments && submission.attachments.map((attachment, index) => (
+              <div key={index} className="file-item">
+                <div className="file-icon">📎</div>
+                <div className="file-info">
+                  <div className="file-name">{typeof attachment === 'string' ? attachment.split('/').pop() : 'File'}</div>
+                </div>
+                <a
+                  href={`/uploads/${attachment}`}
                   download
                   className="download-btn"
                   target="_blank"

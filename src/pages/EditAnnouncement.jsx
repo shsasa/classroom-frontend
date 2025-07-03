@@ -34,34 +34,25 @@ const EditAnnouncement = () => {
     const fetchInitialData = async () => {
       try {
         setFetching(true);
-        console.log('🔍 Fetching announcement with ID:', id);
-
         // Check if user is authenticated
         const token = localStorage.getItem('token');
         if (!token) {
-          console.error('❌ No authentication token found');
           toast.error('Please login first');
           navigate('/signin');
           return;
         }
 
-        console.log('✅ Token found, proceeding with API calls');
-
         // First check if the announcement exists
         let announcement;
         try {
-          console.log('📡 Fetching announcement...');
           const announcementResponse = await api.get(`/announcements/${id}`);
           announcement = announcementResponse.data;
-          console.log('✅ Announcement fetched:', announcement);
         } catch (announcementError) {
-          console.error('❌ Failed to fetch announcement:', announcementError);
           throw new Error(`Announcement not found: ${announcementError.message}`);
         }        // Then fetch other data
-        console.log('📡 Fetching batches and courses...');
         const filterDataResponse = await api.get('/announcements/filter-data');
 
-        console.log('✅ All data fetched successfully');
+        // All data fetched successfully
 
         setFormData({
           title: announcement.title || '',

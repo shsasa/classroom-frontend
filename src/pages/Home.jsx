@@ -1,134 +1,93 @@
-import React, { useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import '../styles/Home.css'
 
 const Home = () => {
   const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
 
-  // Redirect users based on their role when they first login
-  useEffect(() => {
-    if (user && user.role) {
-      const currentPath = window.location.pathname
-
-      // Only redirect if user is on the exact home page
-      if (currentPath === '/') {
-        switch (user.role) {
-          case 'admin':
-          case 'supervisor':
-            // Admins go to users management or batches
-            setTimeout(() => navigate('/batches'), 500)
-            break
-          case 'teacher':
-            // Teachers go to their batches
-            setTimeout(() => navigate('/teacher/batches'), 500)
-            break
-          case 'student':
-            // Students go to their batches
-            setTimeout(() => navigate('/student/batches'), 500)
-            break
-          default:
-            break
-        }
-      }
-    }
-  }, [user, navigate])
-
-  const getRoleBasedWelcome = () => {
-    if (!user) {
-      return {
-        title: 'Welcome to Classroom Manager',
-        subtitle: 'Please sign in to access all features',
-        icon: '🎓',
-        actions: []
-      }
-    }
-
-    switch (user.role) {
+  const getRoleIcon = (role) => {
+    switch (role) {
       case 'admin':
+        return '👨‍💼'
       case 'supervisor':
-        return {
-          title: `Welcome back, ${user.name}!`,
-          subtitle: 'Manage your educational institution efficiently',
-          icon: '👨‍💼',
-          actions: [
-            { label: 'Manage Users', path: '/users', icon: '👥' },
-            { label: 'View Batches', path: '/batches', icon: '🎓' },
-            { label: 'Manage Courses', path: '/courses', icon: '📚' },
-            { label: 'Announcements', path: '/announcements', icon: '📢' }
-          ]
-        }
+        return '🧐'
       case 'teacher':
-        return {
-          title: `Welcome back, Professor ${user.name}!`,
-          subtitle: 'Manage your classes and assignments',
-          icon: '👨‍🏫',
-          actions: [
-            { label: 'My Batches', path: '/teacher/batches', icon: '🎓' },
-            { label: 'My Assignments', path: '/teacher/assignments', icon: '📝' },
-            { label: 'Attendance', path: '/attendance', icon: '📊' },
-            { label: 'Courses', path: '/courses', icon: '📚' }
-          ]
-        }
+        return '👨‍🏫'
       case 'student':
-        return {
-          title: `Welcome back, ${user.name}!`,
-          subtitle: 'Continue your learning journey',
-          icon: '👨‍🎓',
-          actions: [
-            { label: 'My Batches', path: '/student/batches', icon: '🎓' },
-            { label: 'My Assignments', path: '/student/assignments', icon: '📝' },
-            { label: 'My Courses', path: '/student/courses', icon: '📚' },
-            { label: 'My Attendance', path: '/student/attendance', icon: '📊' }
-          ]
-        }
+        return '👨‍🎓'
       default:
-        return {
-          title: `Welcome, ${user.name}!`,
-          subtitle: 'Explore the platform',
-          icon: '👤',
-          actions: []
-        }
+        return '👤'
     }
   }
 
-  const welcomeData = getRoleBasedWelcome()
+  const getRoleInfo = (role) => {
+    switch (role) {
+      case 'admin':
+        return 'You have full access to manage users, courses, and system settings.'
+      case 'supervisor':
+        return 'You can monitor teachers, courses, and overall system performance.'
+      case 'teacher':
+        return 'You can manage your classes, assignments, and track student progress.'
+      case 'student':
+        return 'You can access your courses, assignments, and track your progress.'
+      default:
+        return 'Welcome to the Classroom Manager platform.'
+    }
+  }
+
+  // Get current date in a nice format
+  const getCurrentDate = () => {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    return new Date().toLocaleDateString(undefined, options)
+  }
 
   return (
     <div className="home-container">
-      <div className="welcome-section">
-        <div className="welcome-header">
-          <div className="welcome-icon">{welcomeData.icon}</div>
-          <h1 className="welcome-title">{welcomeData.title}</h1>
-          <p className="welcome-subtitle">{welcomeData.subtitle}</p>
-        </div>
-
-        {user && welcomeData.actions.length > 0 && (
-          <div className="quick-actions">
-            <h3>Quick Actions</h3>
-            <div className="actions-grid">
-              {welcomeData.actions.map((action, index) => (
-                <button
-                  key={index}
-                  className="action-card"
-                  onClick={() => navigate(action.path)}
-                >
-                  <span className="action-icon">{action.icon}</span>
-                  <span className="action-label">{action.label}</span>
-                </button>
-              ))}
-            </div>
+      <div className="home-welcome-section">
+        <div className="home-welcome-header">
+          <div className="home-welcome-icon">
+            {user ? getRoleIcon(user.role) : '🎓'}
           </div>
-        )}
+          <h1 className="home-welcome-title">
+            {user ? `Welcome, ${user.name}!` : 'Welcome to Classroom Manager'}
+          </h1>
+          <p className="home-welcome-subtitle">
+            {user ? getRoleInfo(user.role) : 'Please sign in to access all features'}
+          </p>
 
-        {user && (
-          <div className="user-status">
-            <div className="status-card">
-              <span className="status-label">Logged in as:</span>
-              <span className={`status-role role-${user.role}`}>
+          {user && (
+            <div className="home-user-info">
+              <span className={`home-role-badge home-role-${user.role}`}>
                 {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
               </span>
+              <span className="home-user-email">{user.email}</span>
+            </div>
+          )}
+        </div>        {user && (
+          <div className="home-system-info">
+            <h2>Classroom Manager</h2>
+            <div className="home-info-grid">
+              <div className="home-info-card">
+                <span className="home-info-icon">📅</span>
+                <span className="home-info-title">Today's Date</span>
+                <span className="home-info-value">{getCurrentDate()}</span>
+              </div>
+
+              <div className="home-info-card">
+                <span className="home-info-icon">🔐</span>
+                <span className="home-info-title">Last Login</span>
+                <span className="home-info-value">Just now</span>
+              </div>
+
+              <div className="home-info-card">
+                <span className="home-info-icon">📚</span>
+                <span className="home-info-title">Platform</span>
+                <span className="home-info-value">Classroom Manager</span>
+              </div>
+            </div>
+
+            <div className="home-system-version">
+              Version 1.0.0 • Educational Management System
             </div>
           </div>
         )}

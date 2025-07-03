@@ -44,12 +44,7 @@ export const createCourse = async (courseData) => {
     const token = localStorage.getItem('token')
     if (!token) {
       throw new Error('No token found')
-    }
-
-    console.log('Creating course with data:', courseData)
-
-    const response = await api.post('/courses', courseData)
-    console.log('Course created successfully:', response.data)
+    } const response = await api.post('/courses', courseData)
     return response.data
   } catch (error) {
     console.error('Error creating course:', error)
@@ -67,10 +62,7 @@ export const updateCourse = async (id, courseData) => {
       throw new Error('No token found')
     }
 
-    console.log('Updating course with data:', courseData)
-
     const response = await api.put(`/courses/${id}`, courseData)
-    console.log('Course updated successfully:', response.data)
     return response.data
   } catch (error) {
     console.error('Error updating course:', error)
@@ -89,7 +81,7 @@ export const deleteCourse = async (id) => {
     }
 
     const response = await api.delete(`/courses/${id}`)
-    console.log('Course deleted successfully:', response.data)
+    // Course deleted successfully
     return response.data
   } catch (error) {
     console.error('Error deleting course:', error)

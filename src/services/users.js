@@ -146,14 +146,10 @@ export const resetPassword = async (resetToken, password) => {
 // Activate account and set password for first time
 export const activateAccount = async (activationToken, password) => {
   try {
-    console.log('Activating account with token:', activationToken ? activationToken.substring(0, 8) + '...' : 'No token')
-
     const response = await api.post('/auth/activate-account', {
       resetToken: activationToken, // Using resetToken field for consistency with backend
       password
     })
-
-    console.log('Account activation response:', response.data)
     return response.data
   } catch (error) {
     console.error('Error activating account:', error)

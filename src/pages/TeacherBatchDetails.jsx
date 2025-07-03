@@ -253,9 +253,50 @@ const TeacherBatchDetails = () => {
 
       {/* Content Grid */}
       <div className="teacher-batch-content">
+        {/* Basic Information */}
+        <div className="content-section">
+          <div className="section-header">
+            <h3>
+              <span className="section-icon">📋</span>
+              Basic Information
+            </h3>
+          </div>
+          <div className="info-grid">
+            <div className="info-item">
+              <label>Batch Name</label>
+              <span>{batch.name}</span>
+            </div>
+            <div className="info-item">
+              <label>Status</label>
+              <span className={`status-badge ${status}`}>
+                {getStatusText(status)}
+              </span>
+            </div>
+            <div className="info-item">
+              <label>Start Date</label>
+              <span>{formatDate(batch.startDate)}</span>
+            </div>
+            <div className="info-item">
+              <label>End Date</label>
+              <span>{formatDate(batch.endDate)}</span>
+            </div>
+            {batch.description && (
+              <div className="info-item full-width">
+                <label>Description</label>
+                <span>{batch.description}</span>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Quick Stats */}
         <div className="teacher-stats-section">
+          <div className="section-header">
+            <h3>
+              <span className="section-icon">📊</span>
+              Statistics
+            </h3>
+          </div>
           <div className="stats-grid">
             <div className="stat-card">
               <div className="stat-icon">👥</div>

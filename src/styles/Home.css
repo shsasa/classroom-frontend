@@ -1,21 +1,214 @@
-/* Home Page Styles - Updated Color Palette */
+/* Home.css - New Welcome Page Styles */
+
 .home-container {
-  max-width: 600px;
-  margin: 3rem auto;
-  background: var(--bg-red-lightest);
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(177, 66, 44, 0.1);
-  padding: 2.5rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-welcome-header {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
   text-align: center;
 }
 
-.home-container h1 {
-  color: var(--primary-red);
-  margin-bottom: 1.5rem;
-  font-size: 2.2rem;
+.home-welcome-icon {
+  font-size: 3.5rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 10px;
 }
 
-.home-container p {
-  color: var(--primary-red-dark);
+.home-welcome-title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.home-welcome-subtitle {
   font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 10px 0 0 0;
+}
+
+.home-role-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: inline-block;
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.home-role-admin {
+  background: rgba(255, 107, 107, 0.8);
+}
+
+.home-role-supervisor {
+  background: rgba(255, 193, 7, 0.8);
+}
+
+.home-role-teacher {
+  background: rgba(40, 167, 69, 0.8);
+}
+
+.home-role-student {
+  background: rgba(0, 123, 255, 0.8);
+}
+
+.home-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.home-user-email {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.home-system-info {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e1e5e9;
+  padding: 30px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.home-system-info h2 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.home-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.home-info-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid #e1e5e9;
+}
+
+.home-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  background: #fff;
+}
+
+.home-info-icon {
+  font-size: 2rem;
+  color: #dc2626;
+}
+
+.home-info-title {
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.home-info-value {
+  font-size: 1.1rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+/* System version at the bottom */
+.home-system-version {
+  text-align: center;
+  margin-top: 30px;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .home-welcome-header {
+    padding: 30px 20px;
+  }
+
+  .home-welcome-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2.8rem;
+  }
+
+  .home-welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .home-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 15px;
+  }
+
+  .home-welcome-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.5rem;
+  }
+
+  .home-welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .home-welcome-subtitle {
+    font-size: 1rem;
+  }
+
+  .home-system-info {
+    padding: 20px;
+  }
 }
