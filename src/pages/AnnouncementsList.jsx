@@ -37,7 +37,6 @@ const AnnouncementsList = () => {
 
   const fetchAnnouncements = useCallback(async () => {
     try {
-      console.log('🔄 Fetching announcements with filters:', filters);
       setLoading(true);
       const queryParams = new URLSearchParams();
       if (filters.search) queryParams.append('search', filters.search);
@@ -45,12 +44,10 @@ const AnnouncementsList = () => {
       if (filters.course) queryParams.append('course', filters.course);
 
       const response = await api.get(`/announcements?${queryParams}`);
-      console.log('📋 Announcements response:', response.data);
 
       // Ensure response.data is an array
       if (Array.isArray(response.data)) {
         setAnnouncements(response.data);
-        console.log('✅ Announcements loaded successfully:', response.data.length);
       } else {
         console.error('❌ Invalid announcements data format:', response.data);
         setAnnouncements([]);
@@ -73,13 +70,10 @@ const AnnouncementsList = () => {
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        console.log('🔄 Loading initial filter data...');
         // Use the new filter-data endpoint instead of separate calls
         const [filterDataResponse] = await Promise.all([
           api.get('/announcements/filter-data')
         ]);
-
-        console.log('📊 Filter data response:', filterDataResponse.data);
 
         // Ensure batches and courses are arrays with better error handling
         const batchesData = filterDataResponse?.data?.batches;
@@ -87,8 +81,6 @@ const AnnouncementsList = () => {
 
         setBatches(Array.isArray(batchesData) ? batchesData : []);
         setCourses(Array.isArray(coursesData) ? coursesData : []);
-
-        console.log('✅ Filter data loaded successfully');
       } catch (error) {
         console.error('❌ Error fetching initial data:', error);
         console.error('Error details:', {

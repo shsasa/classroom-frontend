@@ -42,9 +42,7 @@ const TeacherAssignmentDetails = () => {
 
   const fetchSubmissions = async () => {
     try {
-      console.log('Fetching submissions for assignment:', id)
       const response = await api.get(`/submissions/assignment/${id}`)
-      console.log('Fetched submissions:', response.data)
 
       // Make sure we have all needed fields
       const processedSubmissions = response.data.map(sub => {
@@ -59,7 +57,6 @@ const TeacherAssignmentDetails = () => {
         }
       })
 
-      console.log('Processed submissions:', processedSubmissions)
       setSubmissions(processedSubmissions)
     } catch (error) {
       console.error('Error fetching submissions:', error)
@@ -69,7 +66,6 @@ const TeacherAssignmentDetails = () => {
 
   const handleGradeSubmission = async (submissionId, grade, feedback) => {
     try {
-      console.log('Grading submission:', { submissionId, grade, feedback })
       await api.put(`/submissions/${submissionId}/grade`, {
         grade,
         feedback

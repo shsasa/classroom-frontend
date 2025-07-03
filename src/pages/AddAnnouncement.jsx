@@ -111,16 +111,6 @@ const AddAnnouncement = () => {
         submitData.append('attachments', file);
       });
 
-      console.log('Sending create data with files:', {
-        title: formData.title.trim(),
-        content: formData.content.trim(),
-        batch: formData.batch,
-        course: formData.course,
-        isPinned: formData.isPinned,
-        isActive: formData.isActive,
-        filesCount: selectedFiles.length
-      });
-
       await api.post('/announcements', submitData, {
         headers: {
           'Content-Type': 'multipart/form-data',

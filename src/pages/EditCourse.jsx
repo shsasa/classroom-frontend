@@ -23,16 +23,11 @@ const EditCourse = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Fetching course and teachers data...')
-
         // Fetch both course and teachers in parallel
         const [courseResponse, usersResponse] = await Promise.all([
           getCourseById(id),
           getAllUsers({ role: 'teacher' })
         ])
-
-        console.log('Course data:', courseResponse)
-        console.log('Teachers data:', usersResponse)
 
         // Set course data
         const course = courseResponse
@@ -152,9 +147,7 @@ const EditCourse = () => {
         attachments: formData.attachments
       }
 
-      console.log('Updating course with data:', courseData)
       const result = await updateCourse(id, courseData)
-      console.log('Course update result:', result)
       toast.success('Course updated successfully!')
       navigate(`/courses/${id}`)
     } catch (error) {

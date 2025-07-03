@@ -21,9 +21,7 @@ const AddCourse = () => {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        console.log('Fetching teachers...')
         const users = await getAllUsers({ role: 'teacher' })
-        console.log('Teachers fetched:', users)
         setTeachers(users)
       } catch (error) {
         console.error('Error fetching teachers:', error)

@@ -69,8 +69,6 @@ const EditAnnouncement = () => {
 
         setBatches(filterDataResponse.data.batches);
         setCourses(filterDataResponse.data.courses);
-
-        console.log('✅ State updated successfully');
       } catch (error) {
         console.error('❌ Error in fetchInitialData:', error);
         toast.error(`Failed to load announcement: ${error.message}`);
@@ -157,16 +155,7 @@ const EditAnnouncement = () => {
         updateData.append('attachments', file);
       });
 
-      console.log('Sending update data with files:', {
-        title: formData.title.trim(),
-        content: formData.content.trim(),
-        batch: formData.batch,
-        course: formData.course,
-        isPinned: formData.isPinned,
-        isActive: formData.isActive,
-        existingAttachmentsCount: existingAttachments.length,
-        newFilesCount: selectedFiles.length
-      });
+      // Update data ready to be sent
 
       const response = await api.put(`/announcements/${id}`, updateData, {
         headers: {
@@ -174,7 +163,7 @@ const EditAnnouncement = () => {
         },
       });
 
-      console.log('Update response:', response.data);
+      // Announcement updated successfully
       toast.success('Announcement updated successfully!');
       navigate('/announcements');
     } catch (error) {
