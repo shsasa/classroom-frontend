@@ -36,6 +36,8 @@ import StudentAssignments from './pages/StudentAssignments'
 import StudentAssignmentDetail from './pages/StudentAssignmentDetail'
 import TeacherAssignments from './pages/TeacherAssignments'
 import TeacherAssignmentDetails from './pages/TeacherAssignmentDetails'
+import TeacherBatchDetails from './pages/TeacherBatchDetails'
+import TeacherBatches from './pages/TeacherBatches'
 import CreateAssignment from './pages/CreateAssignment'
 import AttendanceManagement from './pages/AttendanceManagement'
 import StudentAttendance from './pages/StudentAttendance'
@@ -125,8 +127,10 @@ const App = () => {
           <Route path="/student/assignments" element={<StudentAssignments />} />
           <Route path="/student/assignments/:id" element={<StudentAssignmentDetail />} />
           <Route path="/student/attendance" element={<StudentAttendance />} />
+          <Route path="/teacher/batches" element={<TeacherBatches />} />
           <Route path="/teacher/assignments" element={<TeacherAssignments />} />
           <Route path="/teacher/assignments/:id" element={<TeacherAssignmentDetails />} />
+          <Route path="/teacher/batches/:id" element={<TeacherBatchDetails />} />
           <Route path="/assignments/create" element={<CreateAssignment />} />
           <Route path="/attendance" element={<AttendanceManagement />} />
           <Route path="/test" element={<TestPage />} />

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import api from '../services/api'
-import { toast } from 'react-toastify'
-import AddStudentsToBatch from '../components/forms/AddStudentsToBatch'
-import AddTeachersToBatch from '../components/forms/AddTeachersToBatch'
-import AddCoursesToBatch from '../components/forms/AddCoursesToBatch'
-import EditBatchSchedule from '../components/forms/EditBatchSchedule'
-import '../styles/BatchDetails.css'
-import '../styles/GlobalRedThemeOverrides.css'
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import api from '../services/api';
+import { toast } from 'react-toastify';
+import AddStudentsToBatch from '../components/forms/AddStudentsToBatch';
+import AddTeachersToBatch from '../components/forms/AddTeachersToBatch';
+import AddCoursesToBatch from '../components/forms/AddCoursesToBatch';
+import EditBatchSchedule from '../components/forms/EditBatchSchedule';
+import '../styles/BatchDetails.css';
 
 const BatchDetails = () => {
   const { id } = useParams();
@@ -15,36 +14,15 @@ const BatchDetails = () => {
   const [batch, setBatch] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showAddStudentModal, setShowAddStudentModal] = useState(false);
-  const [showAddTeacherModal, setShowAddTeacherModal] = useState(false);
-  const [showAddCourseModal, setShowAddCourseModal] = useState(false);
+  const [showAddStudentsModal, setShowAddStudentsModal] = useState(false);
+  const [showAddTeachersModal, setShowAddTeachersModal] = useState(false);
+  const [showAddCoursesModal, setShowAddCoursesModal] = useState(false);
   const [showEditScheduleModal, setShowEditScheduleModal] = useState(false);
-  
-  // We no longer need these states since the form components handle their own data
-  // const [availableUsers, setAvailableUsers] = useState([]);
-  // const [availableCourses, setAvailableCourses] = useState([]);
-  // const [loadingAction, setLoadingAction] = useState(false);
 
   // Get user role from localStorage
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const userRole = user.role;
-  const userId = user.id;
-  
-  // Define permissions based on user role
-  const isAdmin = userRole === 'admin';
-  const isTeacher = userRole === 'teacher';
-  const isStudent = userRole === 'student';
-  const isSupervisor = userRole === 'supervisor';
-  
-  // Permissions for different actions
-  const canManageBatches = isAdmin || isSupervisor; // Can add/remove students, teachers, courses
-  const canViewAllSections = isAdmin || isSupervisor; // Can see all sections
-  const canViewTeachersAndCourses = isAdmin || isSupervisor || isTeacher; // Teachers can see other teachers and courses
-  const canEditBatch = isAdmin; // Only admin can edit/delete batch
-  const canViewStudents = isAdmin || isSupervisor || isTeacher; // Teachers can see students in their batches
-  
-  // Check if current user belongs to this batch
-  const [userBelongsToBatch, setUserBelongsToBatch] = useState(false);
+  const canManageBatches = ['admin', 'supervisor'].includes(userRole);
 
   useEffect(() => {
     const fetchBatchDetails = async () => {
@@ -53,25 +31,6 @@ const BatchDetails = () => {
         setError(null);
         const response = await api.get(`/batches/${id}`);
         setBatch(response.data);
-        
-        // Check if current user belongs to this batch
-        const batchData = response.data;
-        let belongsToBatch = false;
-        
-        if (isStudent) {
-          // Check if student is in the students array
-          belongsToBatch = batchData.students?.some(student => 
-            (typeof student === 'object' ? student._id : student) === userId
-          );
-        } else if (isTeacher) {
-          // Check if teacher is in the teachers array
-          belongsToBatch = batchData.teachers?.some(teacher => 
-            (typeof teacher === 'object' ? teacher._id : teacher) === userId
-          );
-        }
-        
-        setUserBelongsToBatch(belongsToBatch);
-        
       } catch (error) {
         console.error('Error fetching batch details:', error);
         setError('Failed to fetch batch details');
@@ -82,26 +41,7 @@ const BatchDetails = () => {
     };
 
     fetchBatchDetails();
-  }, [id, isStudent, isTeacher, userId]);
-
-  // Simplified handlers since the form components handle their own logic
-  const handleOpenAddStudents = () => {
-    setShowAddStudentModal(true);
-  };
-
-  const handleCloseAddStudents = () => {
-    setShowAddStudentModal(false);
-  };
-
-  const handleStudentsAdded = async () => {
-    // Refresh batch data to show newly added students
-    try {
-      const response = await api.get(`/batches/${id}`);
-      setBatch(response.data);
-    } catch (error) {
-      console.error('Error refreshing batch data:', error);
-    }
-  };
+  }, [id]);
 
   const formatDate = (dateString) => {
     try {
@@ -149,16 +89,16 @@ const BatchDetails = () => {
     }
   };
 
-  const handleOpenAddTeachers = () => {
-    setShowAddTeacherModal(true);
+  const handleOpenAddStudents = () => {
+    setShowAddStudentsModal(true);
   };
 
-  const handleCloseAddTeachers = () => {
-    setShowAddTeacherModal(false);
+  const handleCloseAddStudents = () => {
+    setShowAddStudentsModal(false);
   };
 
-  const handleTeachersAdded = async () => {
-    // Refresh batch data to show newly added teachers
+  const handleStudentsAdded = async () => {
+    // Refresh batch data to show newly added students
     try {
       const response = await api.get(`/batches/${id}`);
       setBatch(response.data);
@@ -184,16 +124,16 @@ const BatchDetails = () => {
     }
   };
 
-  const handleOpenAddCourses = () => {
-    setShowAddCourseModal(true);
+  const handleOpenAddTeachers = () => {
+    setShowAddTeachersModal(true);
   };
 
-  const handleCloseAddCourses = () => {
-    setShowAddCourseModal(false);
+  const handleCloseAddTeachers = () => {
+    setShowAddTeachersModal(false);
   };
 
-  const handleCoursesAdded = async () => {
-    // Refresh batch data to show newly added courses
+  const handleTeachersAdded = async () => {
+    // Refresh batch data to show newly added teachers
     try {
       const response = await api.get(`/batches/${id}`);
       setBatch(response.data);
@@ -216,6 +156,24 @@ const BatchDetails = () => {
     } catch (error) {
       console.error('Error removing teacher:', error);
       toast.error('Failed to remove teacher');
+    }
+  };
+
+  const handleOpenAddCourses = () => {
+    setShowAddCoursesModal(true);
+  };
+
+  const handleCloseAddCourses = () => {
+    setShowAddCoursesModal(false);
+  };
+
+  const handleCoursesAdded = async () => {
+    // Refresh batch data to show newly added courses
+    try {
+      const response = await api.get(`/batches/${id}`);
+      setBatch(response.data);
+    } catch (error) {
+      console.error('Error refreshing batch data:', error);
     }
   };
 
@@ -282,26 +240,6 @@ const BatchDetails = () => {
 
   const status = getBatchStatus(batch.startDate, batch.endDate);
 
-  // Show limited access message for students not in this batch
-  if (isStudent && !userBelongsToBatch) {
-    return (
-      <div className="batch-details-container">
-        <div className="error">
-          <div className="error-icon">🚫</div>
-          <h3>Access Restricted</h3>
-          <p>You don't have access to view details of this batch.</p>
-          <p>You can only view batches you are enrolled in.</p>
-          <button
-            className="btn btn-primary"
-            onClick={() => navigate('/batches')}
-          >
-            Back to Batches
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="batch-details-container">
       {/* Header Section */}
@@ -335,8 +273,6 @@ const BatchDetails = () => {
             <span className="btn-icon">⬅️</span>
             Back to Batches
           </button>
-          
-          {/* All users can view assignments */}
           <button
             className="btn btn-info"
             onClick={() => navigate(`/batches/${batch._id}/assignments`)}
@@ -344,9 +280,7 @@ const BatchDetails = () => {
             <span className="btn-icon">📝</span>
             Assignments
           </button>
-          
-          {/* Only Admin can edit and delete batches */}
-          {isAdmin && (
+          {canManageBatches && (
             <>
               <button
                 className="btn btn-primary"
@@ -451,199 +385,193 @@ const BatchDetails = () => {
           </div>
         </div>
 
-        {/* Students Section - Visible to Admin, Supervisor, and Teachers */}
-        {canViewStudents && (
-          <div className="content-section">
-            <div className="section-header">
-              <h3>
-                <span className="section-icon">👥</span>
-                Students ({batch.students?.length || 0})
-              </h3>
-              {canManageBatches && (
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleOpenAddStudents}
-                >
-                  <span className="btn-icon">➕</span>
-                  Add Students
-                </button>
-              )}
-            </div>
-            <div className="list-content">
-              {batch.students && batch.students.length > 0 ? (
-                <div className="users-list">
-                  {batch.students.map(student => (
-                    <div key={student._id || student} className="user-item">
-                      <div className="user-avatar">👤</div>
-                      <div className="user-info">
-                        <span
-                          className="user-name clickable"
-                          onClick={() => {
-                            const studentId = typeof student === 'object' ? student._id : student;
-                            navigate(`/users/${studentId}`);
-                          }}
-                          title="Click to view student profile"
-                        >
-                          {typeof student === 'object' ? student.name : 'Student'}
-                        </span>
-                        <span className="user-role">Student</span>
-                      </div>
-                      {canManageBatches && (
-                        <div className="user-actions">
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => handleRemoveStudent(typeof student === 'object' ? student._id : student)}
-                            title="Remove student from batch"
-                          >
-                            <span className="btn-icon">🗑️</span>
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="empty-state">
-                  <div className="empty-icon">👥</div>
-                  <p>No students enrolled yet</p>
-                </div>
-              )}
-            </div>
+        {/* Students Section */}
+        <div className="content-section">
+          <div className="section-header">
+            <h3>
+              <span className="section-icon">👥</span>
+              Students ({batch.students?.length || 0})
+            </h3>
+            {canManageBatches && (
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={handleOpenAddStudents}
+              >
+                <span className="btn-icon">➕</span>
+                Add Students
+              </button>
+            )}
           </div>
-        )}
-
-        {/* Teachers Section - Visible to Admin, Supervisor, and Teachers */}
-        {canViewTeachersAndCourses && (
-          <div className="content-section">
-            <div className="section-header">
-              <h3>
-                <span className="section-icon">👨‍🏫</span>
-                Teachers ({batch.teachers?.length || 0})
-              </h3>
-              {canManageBatches && (
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleOpenAddTeachers}
-                >
-                  <span className="btn-icon">➕</span>
-                  Add Teachers
-                </button>
-              )}
-            </div>
-            <div className="list-content">
-              {batch.teachers && batch.teachers.length > 0 ? (
-                <div className="users-list">
-                  {batch.teachers.map(teacher => (
-                    <div key={teacher._id || teacher} className="user-item">
-                      <div className="user-avatar">👨‍🏫</div>
-                      <div className="user-info">
-                        <span
-                          className="user-name clickable"
-                          onClick={() => {
-                            const teacherId = typeof teacher === 'object' ? teacher._id : teacher;
-                            navigate(`/users/${teacherId}`);
-                          }}
-                          title="Click to view teacher profile"
-                        >
-                          {typeof teacher === 'object' ? teacher.name : 'Teacher'}
-                        </span>
-                        <span className="user-role">Teacher</span>
-                      </div>
-                      {canManageBatches && (
-                        <div className="user-actions">
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => handleRemoveTeacher(typeof teacher === 'object' ? teacher._id : teacher)}
-                            title="Remove teacher from batch"
-                          >
-                            <span className="btn-icon">🗑️</span>
-                          </button>
-                        </div>
-                      )}
+          <div className="list-content">
+            {batch.students && batch.students.length > 0 ? (
+              <div className="users-list">
+                {batch.students.map(student => (
+                  <div key={student._id || student} className="user-item">
+                    <div className="user-avatar">👤</div>
+                    <div className="user-info">
+                      <span
+                        className="user-name clickable"
+                        onClick={() => {
+                          const studentId = typeof student === 'object' ? student._id : student;
+                          navigate(`/users/${studentId}`);
+                        }}
+                        title="Click to view student profile"
+                      >
+                        {typeof student === 'object' ? student.name : 'Student'}
+                      </span>
+                      <span className="user-role">Student</span>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="empty-state">
-                  <div className="empty-icon">👨‍🏫</div>
-                  <p>No teachers assigned yet</p>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Courses Section - Visible to Admin, Supervisor, and Teachers */}
-        {canViewTeachersAndCourses && (
-          <div className="content-section">
-            <div className="section-header">
-              <h3>
-                <span className="section-icon">📚</span>
-                Courses ({batch.courses?.length || 0})
-              </h3>
-              {canManageBatches && (
-                <button
-                  className="btn btn-secondary btn-sm"
-                  onClick={handleOpenAddCourses}
-                >
-                  <span className="btn-icon">➕</span>
-                  Add Courses
-                </button>
-              )}
-            </div>
-            <div className="list-content">
-              {batch.courses && batch.courses.length > 0 ? (
-                <div className="courses-list">
-                  {batch.courses.map(course => (
-                    <div key={course._id || course} className="course-item">
-                      <div className="course-icon">📚</div>
-                      <div className="course-info">
-                        <span
-                          className="course-name clickable"
-                          onClick={() => {
-                            const courseId = typeof course === 'object' ? course._id : course;
-                            navigate(`/courses/${courseId}`);
-                          }}
-                          title="Click to view course details"
+                    {canManageBatches && (
+                      <div className="user-actions">
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleRemoveStudent(typeof student === 'object' ? student._id : student)}
+                          title="Remove student from batch"
                         >
-                          {typeof course === 'object' ? course.name : 'Course'}
-                        </span>
-                        <span className="course-desc">
-                          {typeof course === 'object' ? course.description : 'Course Description'}
-                        </span>
+                          <span className="btn-icon">🗑️</span>
+                        </button>
                       </div>
-                      {canManageBatches && (
-                        <div className="user-actions">
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => handleRemoveCourse(typeof course === 'object' ? course._id : course)}
-                            title="Remove course from batch"
-                          >
-                            <span className="btn-icon">🗑️</span>
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="empty-state">
-                  <div className="empty-icon">📚</div>
-                  <p>No courses assigned yet</p>
-                </div>
-              )}
-            </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-icon">👥</div>
+                <p>No students enrolled yet</p>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
-        {/* Schedule Section - Visible to all, but only Admin can edit */}
+        {/* Teachers Section */}
+        <div className="content-section">
+          <div className="section-header">
+            <h3>
+              <span className="section-icon">👨‍🏫</span>
+              Teachers ({batch.teachers?.length || 0})
+            </h3>
+            {canManageBatches && (
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={handleOpenAddTeachers}
+              >
+                <span className="btn-icon">➕</span>
+                Add Teachers
+              </button>
+            )}
+          </div>
+          <div className="list-content">
+            {batch.teachers && batch.teachers.length > 0 ? (
+              <div className="users-list">
+                {batch.teachers.map(teacher => (
+                  <div key={teacher._id || teacher} className="user-item">
+                    <div className="user-avatar">👨‍🏫</div>
+                    <div className="user-info">
+                      <span
+                        className="user-name clickable"
+                        onClick={() => {
+                          const teacherId = typeof teacher === 'object' ? teacher._id : teacher;
+                          navigate(`/users/${teacherId}`);
+                        }}
+                        title="Click to view teacher profile"
+                      >
+                        {typeof teacher === 'object' ? teacher.name : 'Teacher'}
+                      </span>
+                      <span className="user-role">Teacher</span>
+                    </div>
+                    {canManageBatches && (
+                      <div className="user-actions">
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleRemoveTeacher(typeof teacher === 'object' ? teacher._id : teacher)}
+                          title="Remove teacher from batch"
+                        >
+                          <span className="btn-icon">🗑️</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-icon">👨‍🏫</div>
+                <p>No teachers assigned yet</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Courses Section */}
+        <div className="content-section">
+          <div className="section-header">
+            <h3>
+              <span className="section-icon">📚</span>
+              Courses ({batch.courses?.length || 0})
+            </h3>
+            {canManageBatches && (
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={handleOpenAddCourses}
+              >
+                <span className="btn-icon">➕</span>
+                Add Courses
+              </button>
+            )}
+          </div>
+          <div className="list-content">
+            {batch.courses && batch.courses.length > 0 ? (
+              <div className="courses-list">
+                {batch.courses.map(course => (
+                  <div key={course._id || course} className="course-item">
+                    <div className="course-icon">📚</div>
+                    <div className="course-info">
+                      <span
+                        className="course-name clickable"
+                        onClick={() => {
+                          const courseId = typeof course === 'object' ? course._id : course;
+                          navigate(`/courses/${courseId}`);
+                        }}
+                        title="Click to view course details"
+                      >
+                        {typeof course === 'object' ? course.name : 'Course'}
+                      </span>
+                      <span className="course-desc">
+                        {typeof course === 'object' ? course.description : 'Course Description'}
+                      </span>
+                    </div>
+                    {canManageBatches && (
+                      <div className="user-actions">
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleRemoveCourse(typeof course === 'object' ? course._id : course)}
+                          title="Remove course from batch"
+                        >
+                          <span className="btn-icon">🗑️</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-icon">📚</div>
+                <p>No courses assigned yet</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Schedule Section */}
         <div className="content-section">
           <div className="section-header">
             <h3>
               <span className="section-icon">⏰</span>
               Schedule
             </h3>
-            {isAdmin && (
+            {canManageBatches && (
               <button
                 className="btn btn-secondary btn-sm"
                 onClick={handleOpenEditSchedule}
@@ -679,7 +607,7 @@ const BatchDetails = () => {
       </div>
 
       {/* Add Students Modal */}
-      {showAddStudentModal && (
+      {showAddStudentsModal && (
         <AddStudentsToBatch
           batchId={batch._id}
           onClose={handleCloseAddStudents}
@@ -688,7 +616,7 @@ const BatchDetails = () => {
       )}
 
       {/* Add Teachers Modal */}
-      {showAddTeacherModal && (
+      {showAddTeachersModal && (
         <AddTeachersToBatch
           batchId={batch._id}
           onClose={handleCloseAddTeachers}
@@ -697,7 +625,7 @@ const BatchDetails = () => {
       )}
 
       {/* Add Courses Modal */}
-      {showAddCourseModal && (
+      {showAddCoursesModal && (
         <AddCoursesToBatch
           batchId={batch._id}
           onClose={handleCloseAddCourses}
